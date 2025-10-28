@@ -92,21 +92,19 @@ def run_menu():
         pygame.display.flip()
         clock.tick(60)
 
-
 def draw_board():
     screen.fill(BG_COLOR)
     font = pygame.font.Font(None, 36)
 
     # Draw boxes
-    for i in range(GRID_SIZE):
-        for i in range(GRID_SIZE):
-            for j in range(GRID_SIZE):
-                if boxes[i][j] is not None:
-                    x = MARGIN + j * SPACING
-                    y = MARGIN + i * SPACING
-                    pygame.draw.rect(screen, PLAYER_BOXES[boxes[i][j]], (x, y, SPACING, SPACING))
+    for i in range(GRID_SIZE): # go through rows
+        for j in range(GRID_SIZE): # go through columns
+            if boxes[i][j] is not None:
+                x = MARGIN + j * SPACING
+                y = MARGIN + i * SPACING
+                pygame.draw.rect(screen, PLAYER_BOXES[boxes[i][j]], (x, y, SPACING, SPACING))
 
-    # Draw horizontal lines (with player color)
+    # Draw horizontal lines
     for i in range(GRID_SIZE + 1):
         for j in range(GRID_SIZE):
             player = horizontal_lines[i][j]
@@ -116,7 +114,7 @@ def draw_board():
                 color = PLAYER_COLORS[player]
                 pygame.draw.line(screen, color, (x1, y1), (x1 + SPACING, y1), LINE_WIDTH)
 
-    # Draw vertical lines (with player color)
+    # Draw vertical lines
     for i in range(GRID_SIZE):
         for j in range(GRID_SIZE + 1):
             player = vertical_lines[i][j]
@@ -162,7 +160,6 @@ def get_line_clicked(pos):
             if abs(x - x1) < 10 and y1 < y < y1 + SPACING and vertical_lines[i][j] is None:
                 return ('v', i, j)
     return None
-
 
 def check_completed_boxes():
     completed = False
