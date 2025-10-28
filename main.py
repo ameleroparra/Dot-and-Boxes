@@ -132,12 +132,12 @@ def draw_board():
             pygame.draw.circle(screen, DOT_COLOR, (x, y), DOT_RADIUS)
 
     # Display scores
-    score_text = f"Red: {scores[0]}   Blue: {scores[1]}"
+    score_text = "Red: " + str(scores[0]) + "   Blue: " + str(scores[1])
     text_surface = font.render(score_text, True, (0, 0, 0))
     screen.blit(text_surface, (WIDTH // 2 - 100, 20))
 
     # Display current turn
-    turn_text = f"{'Red' if current_player == 0 else 'Blue'}'s Turn"
+    turn_text = ("Red" if current_player == 0 else "Blue") + "'s Turn"
     turn_color = PLAYER_COLORS[current_player]
     turn_surface = font.render(turn_text, True, turn_color)
     screen.blit(turn_surface, (WIDTH // 2 - 60, 55))
