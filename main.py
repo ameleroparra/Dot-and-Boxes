@@ -1,5 +1,6 @@
 import pygame
 import sys
+import os
 
 pygame.init()
 
@@ -30,6 +31,30 @@ vertical_lines = [[None] * (GRID_SIZE + 1) for _ in range(GRID_SIZE)]
 boxes = [[None] * GRID_SIZE for _ in range(GRID_SIZE)]
 scores = [0, 0]
 current_player = 0
+
+# Screenshot tracking
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, "data", "raw")
+
+def get_next_game_id():
+    """Find the next available game ID."""
+    if not os.path.exists(DATA_DIR):
+        return 1
+    existing_games = [d for d in os.listdir(DATA_DIR) if d.startswith("game_") and os.path.isdir(os.path.join(DATA_DIR, d))]
+    if not existing_games:
+        return 1
+    game_numbers = []
+    for game_dir in existing_games:
+        try:
+            num = int(game_dir.split("_")[1])
+            game_numbers.append(num)
+        except (IndexError, ValueError):
+            continue
+    return max(game_numbers) + 1 if game_numbers else 1
+
+game_id = get_next_game_id()
+turn = 0
+
 
 
 def run_menu():
@@ -178,6 +203,19 @@ def check_completed_boxes():
 def count_remaining_lines(): # count for game over, useful if we implement different grid sizes
     return sum(line is None for row in horizontal_lines + vertical_lines for line in row)
 
+
+def save_turn_screenshot():
+    """Save screenshot of current game state."""
+    global turn
+    turn += 1
+    game_dir = os.path.join(DATA_DIR, f"game_{game_id}")
+    os.makedirs(game_dir, exist_ok=True)
+    screenshot_path = os.path.join(game_dir, f"turn_{turn:03}.png")
+    pygame.image.save(screen, screenshot_path)
+    print(f"Screenshot saved: {screenshot_path}")
+
+
+
 # Show start menu at start
 mode = run_menu()
 if not mode:
@@ -186,6 +224,11 @@ if not mode:
 
 # Main game loop
 running = True
+
+# Draw initial board and save screenshot
+draw_board()
+save_turn_screenshot()
+
 while running:
     draw_board()
     for event in pygame.event.get():
@@ -200,7 +243,15 @@ while running:
                 else:
                     vertical_lines[i][j] = current_player
 
-                if not check_completed_boxes():
+                # Check for completed boxes FIRST (this fills the boxes)
+                completed = check_completed_boxes()
+                
+                # THEN draw the board with colored boxes and save screenshot
+                draw_board()
+                save_turn_screenshot()
+
+                # Switch player only if no box was completed
+                if not completed:
                     current_player = 1 - current_player
 
     # Check for game over
