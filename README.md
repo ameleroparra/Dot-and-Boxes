@@ -56,3 +56,7 @@ dots-and-boxes/
 - **1 vs AI mode**: Coming soon
 - **Automatic screenshot capture**: Every move is saved with chronological numbering
 - **Auto-incrementing game folders**: Each new game gets its own folder
+
+## Known bugs
+
+Player can place 2 turns in a row if fast enough.
