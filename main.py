@@ -329,6 +329,25 @@ def save_turn_screenshot():
     pygame.image.save(screen, screenshot_path)
     print(f"Screenshot saved: {screenshot_path}")
 
+def get_game_state(last_move=None):
+    # Return current game state
+    horizontal_copy = [row[:] for row in horizontal_lines]
+    vertical_copy = [row[:] for row in vertical_lines]
+    boxes_copy = [row[:] for row in boxes]
+
+    return {
+        "game_id": game_id,
+        "turn": turn,
+        "current_player": current_player,
+        "scores": {"red": scores[0], "blue": scores[1]},
+        "boxes": boxes_copy,
+        "horizontal_lines": horizontal_copy,
+        "vertical_lines": vertical_copy,
+        "remaining_lines": total_lines - lines_drawn,
+        "available_moves": get_available_moves(),
+        "last_move": last_move,
+    }
+
 # Show start menu at start
 mode = run_menu()
 if not mode:
