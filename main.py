@@ -31,6 +31,8 @@ vertical_lines = [[None] * (GRID_SIZE + 1) for _ in range(GRID_SIZE)]
 boxes = [[None] * GRID_SIZE for _ in range(GRID_SIZE)]
 scores = [0, 0]
 current_player = 0
+total_lines = (GRID_SIZE + 1) * GRID_SIZE + GRID_SIZE * (GRID_SIZE + 1)
+lines_drawn = 0
 
 # Screenshot tracking
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -54,8 +56,6 @@ def get_next_game_id():
 
 game_id = get_next_game_id()
 turn = 0
-
-
 
 def run_menu():
     clock = pygame.time.Clock() # to make the program not use 100% CPU
@@ -157,18 +157,17 @@ def draw_board():
             pygame.draw.circle(screen, DOT_COLOR, (x, y), DOT_RADIUS)
 
     # Display scores
-    score_text = "Red: " + str(scores[0]) + "   Blue: " + str(scores[1])
+    score_text = f"Red: {scores[0]}   Blue: {scores[1]}"
     text_surface = font.render(score_text, True, (0, 0, 0))
-    screen.blit(text_surface, (WIDTH // 2 - 100, 20))
+    screen.blit(text_surface, text_surface.get_rect(centerx=WIDTH // 2, top=20))
 
     # Display current turn
-    turn_text = ("Red" if current_player == 0 else "Blue") + "'s Turn"
+    turn_text = f"{'Red' if current_player == 0 else 'Blue'}'s Turn"
     turn_color = PLAYER_COLORS[current_player]
     turn_surface = font.render(turn_text, True, turn_color)
-    screen.blit(turn_surface, (WIDTH // 2 - 60, 55))
+    screen.blit(turn_surface, turn_surface.get_rect(centerx=WIDTH // 2, top=55))
 
     pygame.display.flip()
-
 
 def get_line_clicked(pos):
     x, y = pos
@@ -186,6 +185,14 @@ def get_line_clicked(pos):
                 return ('v', i, j)
     return None
 
+def apply_move(line_type, i, j, player): # adds a line to the counter
+    global lines_drawn
+    if line_type == 'h':
+        horizontal_lines[i][j] = player
+    else:
+        vertical_lines[i][j] = player
+    lines_drawn += 1
+
 def check_completed_boxes():
     completed = False
     for i in range(GRID_SIZE):
@@ -200,9 +207,117 @@ def check_completed_boxes():
                     completed = True
     return completed
 
-def count_remaining_lines(): # count for game over, useful if we implement different grid sizes
-    return sum(line is None for row in horizontal_lines + vertical_lines for line in row)
+def get_available_moves(): # check possible moves
 
+    moves = []
+    for i in range(GRID_SIZE + 1):
+        for j in range(GRID_SIZE):
+            if horizontal_lines[i][j] is None:
+                moves.append(('h', i, j))
+    for i in range(GRID_SIZE):
+        for j in range(GRID_SIZE + 1):
+            if vertical_lines[i][j] is None:
+                moves.append(('v', i, j))
+    return moves
+
+def count_box_edges(bi, bj): # useful for Ai
+    count = 0
+    if horizontal_lines[bi][bj] is not None:
+        count += 1
+    if horizontal_lines[bi + 1][bj] is not None:
+        count += 1
+    if vertical_lines[bi][bj] is not None:
+        count += 1
+    if vertical_lines[bi][bj + 1] is not None:
+        count += 1
+    return count
+
+def will_create_third_edge(line_type, i, j):
+    # Temporarily place the line
+    if line_type == 'h':
+        horizontal_lines[i][j] = current_player
+    else:
+        vertical_lines[i][j] = current_player
+
+    creates_third = False
+    # Check boxes that could be affected by this line
+    affected_boxes = []
+
+    if line_type == 'h':
+        if i > 0:
+            affected_boxes.append((i - 1, j))
+        if i < GRID_SIZE:
+            affected_boxes.append((i, j))
+    else:  # vertical
+        if j > 0:
+            affected_boxes.append((i, j - 1))
+        if j < GRID_SIZE:
+            affected_boxes.append((i, j))
+
+    for bi, bj in affected_boxes:
+        if 0 <= bi < GRID_SIZE and 0 <= bj < GRID_SIZE:
+            if boxes[bi][bj] is None and count_box_edges(bi, bj) == 3:
+                creates_third = True
+                break
+
+    # Remove the temporary line
+    if line_type == 'h':
+        horizontal_lines[i][j] = None
+    else:
+        vertical_lines[i][j] = None
+
+    return creates_third
+
+def ai_move(): # Here the bot choose what to do with simple code
+    import random
+    available = get_available_moves()
+    if not available:
+        return None
+
+    # Strategy 1: Complete a box if possible
+    for move in available:
+        line_type, i, j = move
+        # Temporarily place the line
+        if line_type == 'h':
+            horizontal_lines[i][j] = current_player
+        else:
+            vertical_lines[i][j] = current_player
+
+        # Check if any box is completed
+        completes = False
+        for bi in range(GRID_SIZE):
+            for bj in range(GRID_SIZE):
+                if boxes[bi][bj] is None:
+                    if (horizontal_lines[bi][bj] is not None and
+                            horizontal_lines[bi + 1][bj] is not None and
+                            vertical_lines[bi][bj] is not None and
+                            vertical_lines[bi][bj + 1] is not None):
+                        completes = True
+                        break
+            if completes:
+                break
+
+        # Remove the temporary line
+        if line_type == 'h':
+            horizontal_lines[i][j] = None
+        else:
+            vertical_lines[i][j] = None
+
+        if completes:
+            return move
+
+    # Strategy 2: Avoid creating third edges
+    safe_moves = []
+    for move in available:
+        if not will_create_third_edge(move[0], move[1], move[2]):
+            safe_moves.append(move)
+
+    if safe_moves:
+        return random.choice(safe_moves)
+
+    # Strategy 3: If all moves create third edges, use random one
+    # In future maybe we improve this so the AI is more intelligent
+    return random.choice(available)
 
 def save_turn_screenshot():
     """Save screenshot of current game state."""
@@ -214,8 +329,6 @@ def save_turn_screenshot():
     pygame.image.save(screen, screenshot_path)
     print(f"Screenshot saved: {screenshot_path}")
 
-
-
 # Show start menu at start
 mode = run_menu()
 if not mode:
@@ -224,6 +337,7 @@ if not mode:
 
 # Main game loop
 running = True
+clock = pygame.time.Clock()
 
 # Draw initial board and save screenshot
 draw_board()
@@ -231,37 +345,56 @@ save_turn_screenshot()
 
 while running:
     draw_board()
+
+    # AI turn
+    if mode == '1vAI' and current_player == 1 and lines_drawn < total_lines:
+        pygame.time.wait(300)  # delay for better experience
+        ai_move_result = ai_move()
+        if ai_move_result:
+            line_type, i, j = ai_move_result
+            apply_move(line_type, i, j, current_player)
+
+            # Check for completed boxes
+            completed = check_completed_boxes()
+            draw_board()
+            save_turn_screenshot()
+
+            # Switch player only if no box was completed
+            if not completed:
+                current_player = 1 - current_player
+
+    # PLayer turn
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            line = get_line_clicked(event.pos)
-            if line:
-                line_type, i, j = line
-                if line_type == 'h':
-                    horizontal_lines[i][j] = current_player
-                else:
-                    vertical_lines[i][j] = current_player
+            # In 1vAI only allow clicks when it's player turn
+            if mode == '1v1' or (mode == '1vAI' and current_player == 0):
+                line = get_line_clicked(event.pos)
+                if line:
+                    line_type, i, j = line
+                    apply_move(line_type, i, j, current_player)
 
-                # Check for completed boxes FIRST (this fills the boxes)
-                completed = check_completed_boxes()
-                
-                # THEN draw the board with colored boxes and save screenshot
-                draw_board()
-                save_turn_screenshot()
+                    # Check for completed boxes FIRST (this fills the boxes)
+                    completed = check_completed_boxes()
 
-                # Switch player only if no box was completed
-                if not completed:
-                    current_player = 1 - current_player
+                    # THEN draw the board with colored boxes and save screenshot
+                    draw_board()
+                    save_turn_screenshot()
+
+                    # Switch player only if no box was completed
+                    if not completed:
+                        current_player = 1 - current_player
 
     # Check for game over
-    if count_remaining_lines() == 0:
+    if lines_drawn == total_lines:
         draw_board()
         pygame.time.wait(1000)
         print("Game Over!")
         print(f"Final Scores → Red: {scores[0]}, Blue: {scores[1]}")
         running = False
 
+    clock.tick(30)  # Limit to 30 FPS so its run better
 
 pygame.quit()
 sys.exit()
