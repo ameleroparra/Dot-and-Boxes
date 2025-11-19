@@ -1,6 +1,17 @@
 import pygame
 import sys
 import os
+import json
+import random
+
+# Try importing VLM; if unavailable, set vlm to None and fallback will be used
+try:
+    from vlm import VLM
+
+    vlm = VLM()
+except Exception as e:
+    print("Warning: VLM import/initialization failed:", e)
+    vlm = None
 
 pygame.init()
 
@@ -328,6 +339,26 @@ def save_turn_screenshot():
     screenshot_path = os.path.join(game_dir, f"turn_{turn:03}.png")
     pygame.image.save(screen, screenshot_path)
     print(f"Screenshot saved: {screenshot_path}")
+    return screenshot_path
+
+def save_game_state_json(last_move=None):
+    game_dir = os.path.join(DATA_DIR, f"game_{game_id}")
+    os.makedirs(game_dir, exist_ok=True)
+    state = get_game_state(last_move)
+    state_path = os.path.join(game_dir, f"turn_{turn:03}.json")
+
+    def convert(obj):
+        if isinstance(obj, tuple):
+            return list(obj)
+        if isinstance(obj, list):
+            return [convert(x) for x in obj]
+        return obj
+
+    with open(state_path, "w", encoding="utf-8") as f:
+        json.dump(convert(state), f, indent=2)
+    print(f"Game state saved: {state_path}")
+    return state_path
+
 
 def get_game_state(last_move=None):
     # Return current game state
@@ -348,6 +379,53 @@ def get_game_state(last_move=None):
         "last_move": last_move,
     }
 
+
+def safe_vlm_predict_move(img_path, candidate_moves):
+    if vlm is None:
+        return random.choice(candidate_moves) if candidate_moves else None
+
+    try:
+        move = vlm.predict_move(img_path, candidate_moves)
+    except Exception as e:
+        print("VLM predict error:", e)
+        move = None
+
+    if is_valid_move(move):
+        return move
+
+    if isinstance(move, str):
+        parts = [p.strip() for p in move.replace(",", " ").split()]
+        if len(parts) == 3 and parts[0] in ("h", "v"):
+            try:
+                mi, mj = int(parts[1]), int(parts[2])
+                parsed = (parts[0], mi, mj)
+                if is_valid_move(parsed):
+                    return parsed
+            except Exception:
+                pass
+
+    print("VLM returned invalid move.")
+    return random.choice(candidate_moves) if candidate_moves else None
+
+def is_valid_move(move):
+    if move is None:
+        return False
+    try:
+        t, i, j = move
+    except Exception:
+        return False
+    if t not in ("h", "v"):
+        return False
+    if t == "h":
+        if 0 <= i <= GRID_SIZE and 0 <= j < GRID_SIZE:
+            return horizontal_lines[i][j] is None
+        return False
+    else:
+        if 0 <= i < GRID_SIZE and 0 <= j <= GRID_SIZE:
+            return vertical_lines[i][j] is None
+        return False
+
+
 # Show start menu at start
 mode = run_menu()
 if not mode:
@@ -358,9 +436,10 @@ if not mode:
 running = True
 clock = pygame.time.Clock()
 
-# Draw initial board and save screenshot
+# Draw initial board and save screenshot + JSON
 draw_board()
-save_turn_screenshot()
+last_screenshot = save_turn_screenshot()
+save_game_state_json(last_move=None)
 
 while running:
     draw_board()
@@ -381,6 +460,36 @@ while running:
             # Switch player only if no box was completed
             if not completed:
                 current_player = 1 - current_player
+
+    # VLM turn
+    if mode == 'BotvVLM' and current_player == 1 and lines_drawn < total_lines:
+        pygame.time.wait(300)
+        available = get_available_moves()
+
+        vlm_move = safe_vlm_predict_move(last_screenshot, available)
+
+        if vlm_move:
+            line_type, i, j = vlm_move
+            apply_move(line_type, i, j, current_player)
+
+            completed = check_completed_boxes()
+            draw_board()
+            last_screenshot = save_turn_screenshot()
+            save_game_state_json(last_move=(line_type, i, j))
+
+            if not completed:
+                current_player = 1 - current_player
+        else:
+            fallback = ai_move()
+            if fallback:
+                line_type, i, j = fallback
+                apply_move(line_type, i, j, current_player)
+                completed = check_completed_boxes()
+                draw_board()
+                last_screenshot = save_turn_screenshot()
+                save_game_state_json(last_move=(line_type, i, j))
+                if not completed:
+                    current_player = 1 - current_player
 
     # PLayer turn
     for event in pygame.event.get():
@@ -411,6 +520,8 @@ while running:
         pygame.time.wait(1000)
         print("Game Over!")
         print(f"Final Scores → Red: {scores[0]}, Blue: {scores[1]}")
+        last_screenshot = save_turn_screenshot()
+        save_game_state_json(last_move=None)
         running = False
 
     clock.tick(30)  # Limit to 30 FPS so its run better
