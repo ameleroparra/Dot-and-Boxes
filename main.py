@@ -76,27 +76,31 @@ def run_menu():
     btn_width, btn_height = 300, 70
     btn_x = WIDTH // 2 - btn_width // 2 # center horizontally
     spacing_between = 20
-    total_height = btn_height * 3 + spacing_between * 2
+    total_height = btn_height * 4 + spacing_between * 3
     start_y = HEIGHT // 2 - total_height // 2
 
     btn_y1 = start_y
     btn_y2 = start_y + btn_height + spacing_between
     btn_y3 = start_y + 2 * (btn_height + spacing_between)
+    btn_y4 = start_y + 3 * (btn_height + spacing_between)
 
-    rect_1v1 = pygame.Rect(btn_x, btn_y1, btn_width, btn_height)
-    rect_1vAI = pygame.Rect(btn_x, btn_y2, btn_width, btn_height)
-    rect_exit = pygame.Rect(btn_x, btn_y3, btn_width, btn_height)
+    rect_1_v_1 = pygame.Rect(btn_x, btn_y1, btn_width, btn_height)
+    rect_1_v_bot = pygame.Rect(btn_x, btn_y2, btn_width, btn_height)
+    rect_bot_vs_vlm = pygame.Rect(btn_x, btn_y3, btn_width, btn_height)
+    rect_exit = pygame.Rect(btn_x, btn_y4, btn_width, btn_height)
 
     # Text surfaces and positions
     title_surf = title_font.render("Dots and Boxes", True, (0, 0, 0))
     title_pos = (WIDTH // 2 - title_surf.get_width() // 2, 80)
 
     text_1v1 = btn_font.render("1 vs 1", True, BUTTON_TEXT_COLOR)
-    text_1vAI = btn_font.render("1 vs AI", True, BUTTON_TEXT_COLOR)
+    text_1_v_bot = btn_font.render("1 vs Bot", True, BUTTON_TEXT_COLOR)
+    text_bot_vs_vlm = btn_font.render("Bot vs VLM", True, BUTTON_TEXT_COLOR)
     text_exit = btn_font.render("Exit", True, BUTTON_TEXT_COLOR)
 
-    text_1v1_rect = text_1v1.get_rect(center=rect_1v1.center)
-    text_1vAI_rect = text_1vAI.get_rect(center=rect_1vAI.center)
+    text_1v1_rect = text_1v1.get_rect(center=rect_1_v_1.center)
+    text_1_v_bot_rect = text_1_v_bot.get_rect(center=rect_1_v_bot.center)
+    text_bot_vs_vlm_rect = text_bot_vs_vlm.get_rect(center=rect_bot_vs_vlm.center)
     text_exit_rect = text_exit.get_rect(center=rect_exit.center)
 
     while True:
@@ -105,10 +109,12 @@ def run_menu():
             if event.type == pygame.QUIT:  # close window
                 return None
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_1v1.collidepoint(event.pos):
+                if rect_1_v_1.collidepoint(event.pos):
                     return '1v1'
-                if rect_1vAI.collidepoint(event.pos):
-                    return '1vAI'
+                if rect_1_v_bot.collidepoint(event.pos):
+                    return '1vBot'
+                if rect_bot_vs_vlm.collidepoint(event.pos):
+                    return 'BotvVLM'
                 if rect_exit.collidepoint(event.pos):
                     return None
 
@@ -117,12 +123,14 @@ def run_menu():
         screen.blit(title_surf, title_pos)
 
         # draw buttons (change color on hover)
-        pygame.draw.rect(screen, BUTTON_HOVER if rect_1v1.collidepoint(mouse_pos) else BUTTON_COLOR, rect_1v1)
-        pygame.draw.rect(screen, BUTTON_HOVER if rect_1vAI.collidepoint(mouse_pos) else BUTTON_COLOR, rect_1vAI)
+        pygame.draw.rect(screen, BUTTON_HOVER if rect_1_v_1.collidepoint(mouse_pos) else BUTTON_COLOR, rect_1_v_1)
+        pygame.draw.rect(screen, BUTTON_HOVER if rect_1_v_bot.collidepoint(mouse_pos) else BUTTON_COLOR, rect_1_v_bot)
+        pygame.draw.rect(screen, BUTTON_HOVER if rect_bot_vs_vlm.collidepoint(mouse_pos) else BUTTON_COLOR, rect_bot_vs_vlm)
         pygame.draw.rect(screen, BUTTON_HOVER if rect_exit.collidepoint(mouse_pos) else BUTTON_COLOR, rect_exit)
 
         screen.blit(text_1v1, text_1v1_rect.topleft)
-        screen.blit(text_1vAI, text_1vAI_rect.topleft)
+        screen.blit(text_1_v_bot, text_1_v_bot_rect.topleft)
+        screen.blit(text_bot_vs_vlm, text_bot_vs_vlm_rect.topleft)
         screen.blit(text_exit, text_exit_rect.topleft)
 
         pygame.display.flip()
@@ -219,7 +227,6 @@ def check_completed_boxes():
     return completed
 
 def get_available_moves(): # check possible moves
-
     moves = []
     for i in range(GRID_SIZE + 1):
         for j in range(GRID_SIZE):
@@ -231,7 +238,7 @@ def get_available_moves(): # check possible moves
                 moves.append(('v', i, j))
     return moves
 
-def count_box_edges(bi, bj): # useful for Ai
+def count_box_edges(bi, bj): # useful for Bot
     count = 0
     if horizontal_lines[bi][bj] is not None:
         count += 1
@@ -245,10 +252,11 @@ def count_box_edges(bi, bj): # useful for Ai
 
 def will_create_third_edge(line_type, i, j):
     # Temporarily place the line
+    temp_marker = -1
     if line_type == 'h':
-        horizontal_lines[i][j] = current_player
+        horizontal_lines[i][j] = temp_marker
     else:
-        vertical_lines[i][j] = current_player
+        vertical_lines[i][j] = temp_marker
 
     creates_third = False
     # Check boxes that could be affected by this line
@@ -271,7 +279,7 @@ def will_create_third_edge(line_type, i, j):
                 creates_third = True
                 break
 
-    # Remove the temporary line
+    # Remove the temporary marker
     if line_type == 'h':
         horizontal_lines[i][j] = None
     else:
@@ -279,7 +287,7 @@ def will_create_third_edge(line_type, i, j):
 
     return creates_third
 
-def ai_move(): # Here the bot choose what to do with simple code
+def bot_move():  # Here the bot choose what to do with simple code
     import random
     available = get_available_moves()
     if not available:
@@ -327,7 +335,7 @@ def ai_move(): # Here the bot choose what to do with simple code
         return random.choice(safe_moves)
 
     # Strategy 3: If all moves create third edges, use random one
-    # In future maybe we improve this so the AI is more intelligent
+    # In future maybe we improve this so the Bot is more intelligent
     return random.choice(available)
 
 def save_turn_screenshot():
@@ -444,18 +452,20 @@ save_game_state_json(last_move=None)
 while running:
     draw_board()
 
-    # AI turn
-    if mode == '1vAI' and current_player == 1 and lines_drawn < total_lines:
+    # Bot turn
+    if ((mode == '1vBot' and current_player == 1) or (
+            mode == 'BotvVLM' and current_player == 0)) and lines_drawn < total_lines:
         pygame.time.wait(300)  # delay for better experience
-        ai_move_result = ai_move()
-        if ai_move_result:
-            line_type, i, j = ai_move_result
+        bot_move_result = bot_move()
+        if bot_move_result:
+            line_type, i, j = bot_move_result
             apply_move(line_type, i, j, current_player)
 
             # Check for completed boxes
             completed = check_completed_boxes()
             draw_board()
-            save_turn_screenshot()
+            last_screenshot = save_turn_screenshot()
+            save_game_state_json(last_move=(line_type, i, j))
 
             # Switch player only if no box was completed
             if not completed:
@@ -480,7 +490,7 @@ while running:
             if not completed:
                 current_player = 1 - current_player
         else:
-            fallback = ai_move()
+            fallback = bot_move()
             if fallback:
                 line_type, i, j = fallback
                 apply_move(line_type, i, j, current_player)
@@ -496,8 +506,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            # In 1vAI only allow clicks when it's player turn
-            if mode == '1v1' or (mode == '1vAI' and current_player == 0):
+            if mode == '1v1':
                 line = get_line_clicked(event.pos)
                 if line:
                     line_type, i, j = line
@@ -508,9 +517,21 @@ while running:
 
                     # THEN draw the board with colored boxes and save screenshot
                     draw_board()
-                    save_turn_screenshot()
+                    last_screenshot = save_turn_screenshot()
+                    save_game_state_json(last_move=(line_type, i, j))
+                    if not completed:
+                        current_player = 1 - current_player
 
-                    # Switch player only if no box was completed
+            elif mode == '1vBot' and current_player == 0:
+                # human is Red (player 0)
+                line = get_line_clicked(event.pos)
+                if line:
+                    line_type, i, j = line
+                    apply_move(line_type, i, j, current_player)
+                    completed = check_completed_boxes()
+                    draw_board()
+                    last_screenshot = save_turn_screenshot()
+                    save_game_state_json(last_move=(line_type, i, j))
                     if not completed:
                         current_player = 1 - current_player
 
