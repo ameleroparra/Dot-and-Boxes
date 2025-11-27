@@ -288,7 +288,6 @@ def will_create_third_edge(line_type, i, j):
     return creates_third
 
 def bot_move():  # Here the bot choose what to do with simple code
-    import random
     available = get_available_moves()
     if not available:
         return None
@@ -349,10 +348,58 @@ def save_turn_screenshot():
     print(f"Screenshot saved: {screenshot_path}")
     return screenshot_path
 
-def save_game_state_json(last_move=None):
+def save_game_state_json(last_move=None, completed_this_turn=False):
     game_dir = os.path.join(DATA_DIR, f"game_{game_id}")
     os.makedirs(game_dir, exist_ok=True)
-    state = get_game_state(last_move)
+    screenshot_path = f"data/raw/game_{game_id}/turn_{turn:03}.png"
+
+    state = {
+        "game_id": game_id,
+        "turn": turn,
+        "screenshot": screenshot_path,
+
+        "current_player": current_player,
+        "player_names": {0: "red", 1: "blue"},
+        "scores": {"red": scores[0], "blue": scores[1]},
+
+        "board_state": {
+            "grid_size": GRID_SIZE,
+            "horizontal_lines": [[1 if cell is not None else 0 for cell in row] for row in horizontal_lines],
+            "vertical_lines": [[1 if cell is not None else 0 for cell in row] for row in vertical_lines],
+            "box_owners": boxes,
+        },
+
+        "move_info": {
+            "available_moves": get_available_moves(),
+            "total_possible_moves": total_lines,
+            "moves_made": lines_drawn,
+            "remaining_moves": total_lines - lines_drawn,
+        },
+
+        "move_taken": last_move,
+        "move_player": current_player if last_move else None,
+
+        "strategy_info": {
+            "completed_boxes_this_turn": completed_this_turn,
+            "potential_boxes": count_potential_boxes(),
+            "game_phase": "early" if lines_drawn < total_lines * 0.3 else
+            "mid" if lines_drawn < total_lines * 0.7 else "late",
+            "score_difference": abs(scores[0] - scores[1]),
+            "is_winning": scores[current_player] > scores[1 - current_player],
+        },
+
+        "result": {
+            "game_completed": lines_drawn == total_lines,
+            "final_scores": None,
+            "winner": None,
+        }
+    }
+
+    if lines_drawn == total_lines:
+        state["result"]["final_scores"] = {"red": scores[0], "blue": scores[1]}
+        state["result"]["winner"] = 0 if scores[0] > scores[1] else 1 if scores[1] > scores[0] else "tie"
+        state["result"]["game_completed"] = True
+
     state_path = os.path.join(game_dir, f"turn_{turn:03}.json")
 
     def convert(obj):
@@ -367,26 +414,24 @@ def save_game_state_json(last_move=None):
     print(f"Game state saved: {state_path}")
     return state_path
 
+def count_potential_boxes():
+    two_edges = 0
+    three_edges = 0
 
-def get_game_state(last_move=None):
-    # Return current game state
-    horizontal_copy = [row[:] for row in horizontal_lines]
-    vertical_copy = [row[:] for row in vertical_lines]
-    boxes_copy = [row[:] for row in boxes]
+    for i in range(GRID_SIZE):
+        for j in range(GRID_SIZE):
+            if boxes[i][j] is None:
+                edges = count_box_edges(i, j)
+                if edges == 2:
+                    two_edges += 1
+                elif edges == 3:
+                    three_edges += 1
 
     return {
-        "game_id": game_id,
-        "turn": turn,
-        "current_player": current_player,
-        "scores": {"red": scores[0], "blue": scores[1]},
-        "boxes": boxes_copy,
-        "horizontal_lines": horizontal_copy,
-        "vertical_lines": vertical_copy,
-        "remaining_lines": total_lines - lines_drawn,
-        "available_moves": get_available_moves(),
-        "last_move": last_move,
+        "boxes_with_2_edges": two_edges,
+        "boxes_with_3_edges": three_edges,
+        "total_potential_boxes": two_edges + three_edges
     }
-
 
 def safe_vlm_predict_move(img_path, candidate_moves):
     if vlm is None:
@@ -433,7 +478,6 @@ def is_valid_move(move):
             return vertical_lines[i][j] is None
         return False
 
-
 # Show start menu at start
 mode = run_menu()
 if not mode:
@@ -447,7 +491,7 @@ clock = pygame.time.Clock()
 # Draw initial board and save screenshot + JSON
 draw_board()
 last_screenshot = save_turn_screenshot()
-save_game_state_json(last_move=None)
+save_game_state_json(last_move=None, completed_this_turn=False)
 
 while running:
     draw_board()
@@ -465,7 +509,7 @@ while running:
             completed = check_completed_boxes()
             draw_board()
             last_screenshot = save_turn_screenshot()
-            save_game_state_json(last_move=(line_type, i, j))
+            save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
 
             # Switch player only if no box was completed
             if not completed:
@@ -485,7 +529,7 @@ while running:
             completed = check_completed_boxes()
             draw_board()
             last_screenshot = save_turn_screenshot()
-            save_game_state_json(last_move=(line_type, i, j))
+            save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
 
             if not completed:
                 current_player = 1 - current_player
@@ -497,11 +541,11 @@ while running:
                 completed = check_completed_boxes()
                 draw_board()
                 last_screenshot = save_turn_screenshot()
-                save_game_state_json(last_move=(line_type, i, j))
+                save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
                 if not completed:
                     current_player = 1 - current_player
 
-    # PLayer turn
+    # Player turn
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -518,7 +562,7 @@ while running:
                     # THEN draw the board with colored boxes and save screenshot
                     draw_board()
                     last_screenshot = save_turn_screenshot()
-                    save_game_state_json(last_move=(line_type, i, j))
+                    save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
                     if not completed:
                         current_player = 1 - current_player
 
@@ -531,7 +575,7 @@ while running:
                     completed = check_completed_boxes()
                     draw_board()
                     last_screenshot = save_turn_screenshot()
-                    save_game_state_json(last_move=(line_type, i, j))
+                    save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
                     if not completed:
                         current_player = 1 - current_player
 
@@ -542,7 +586,7 @@ while running:
         print("Game Over!")
         print(f"Final Scores → Red: {scores[0]}, Blue: {scores[1]}")
         last_screenshot = save_turn_screenshot()
-        save_game_state_json(last_move=None)
+        save_game_state_json(last_move=None, completed_this_turn=False)
         running = False
 
     clock.tick(30)  # Limit to 30 FPS so its run better
