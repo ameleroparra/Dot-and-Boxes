@@ -1,150 +1,179 @@
 {
   "game_id": 4,
   "turn": 32,
+  "screenshot": "data/raw/game_4/turn_032.png",
   "current_player": 0,
-  "scores": {
-    "red": 8,
-    "blue": 1
+  "player_names": {
+    "0": "red",
+    "1": "blue"
   },
-  "boxes": [
-    [
-      null,
-      null,
-      null,
-      null
+  "scores": {
+    "red": 1,
+    "blue": 6
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
     ],
-    [
-      0,
-      0,
-      0,
-      0
+    "vertical_lines": [
+      [
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
     ],
-    [
-      1,
-      0,
-      0,
-      null
-    ],
-    [
-      null,
-      null,
-      0,
-      0
+    "box_owners": [
+      [
+        1,
+        0,
+        null,
+        null
+      ],
+      [
+        1,
+        null,
+        null,
+        null
+      ],
+      [
+        1,
+        1,
+        null,
+        null
+      ],
+      [
+        1,
+        1,
+        null,
+        null
+      ]
     ]
-  ],
-  "horizontal_lines": [
-    [
-      0,
-      1,
-      1,
-      1
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        2,
+        2
+      ],
+      [
+        "h",
+        2,
+        3
+      ],
+      [
+        "h",
+        3,
+        2
+      ],
+      [
+        "h",
+        3,
+        3
+      ],
+      [
+        "v",
+        0,
+        3
+      ],
+      [
+        "v",
+        0,
+        4
+      ],
+      [
+        "v",
+        1,
+        2
+      ],
+      [
+        "v",
+        1,
+        4
+      ],
+      [
+        "v",
+        3,
+        3
+      ]
     ],
-    [
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
-      1,
-      0
-    ],
-    [
-      1,
-      0,
-      0,
-      1
-    ],
-    [
-      null,
-      null,
-      0,
-      0
-    ]
-  ],
-  "vertical_lines": [
-    [
-      null,
-      null,
-      null,
-      null,
-      null
-    ],
-    [
-      0,
-      1,
-      0,
-      0,
-      1
-    ],
-    [
-      1,
-      0,
-      0,
-      1,
-      null
-    ],
-    [
-      1,
-      null,
-      0,
-      0,
-      1
-    ]
-  ],
-  "remaining_lines": 9,
-  "available_moves": [
-    [
-      "h",
-      4,
-      0
-    ],
-    [
-      "h",
-      4,
-      1
-    ],
-    [
-      "v",
-      0,
-      0
-    ],
-    [
-      "v",
-      0,
-      1
-    ],
-    [
-      "v",
-      0,
-      2
-    ],
-    [
-      "v",
-      0,
-      3
-    ],
-    [
-      "v",
-      0,
-      4
-    ],
-    [
-      "v",
-      2,
-      4
-    ],
-    [
-      "v",
-      3,
-      1
-    ]
-  ],
-  "last_move": [
-    "h",
-    4,
+    "total_possible_moves": 40,
+    "moves_made": 31,
+    "remaining_moves": 9
+  },
+  "move_taken": [
+    "v",
+    0,
     2
-  ]
+  ],
+  "move_player": 0,
+  "strategy_info": {
+    "completed_boxes_this_turn": true,
+    "potential_boxes": {
+      "boxes_with_2_edges": 7,
+      "boxes_with_3_edges": 2,
+      "total_potential_boxes": 9
+    },
+    "game_phase": "late",
+    "score_difference": 5,
+    "is_winning": false
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
 }

@@ -1,170 +1,199 @@
 {
   "game_id": 4,
   "turn": 28,
+  "screenshot": "data/raw/game_4/turn_028.png",
   "current_player": 1,
-  "scores": {
-    "red": 5,
-    "blue": 1
+  "player_names": {
+    "0": "red",
+    "1": "blue"
   },
-  "boxes": [
-    [
-      null,
-      null,
-      null,
-      null
+  "scores": {
+    "red": 0,
+    "blue": 4
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
     ],
-    [
-      0,
-      0,
-      0,
-      0
+    "vertical_lines": [
+      [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
     ],
-    [
-      1,
-      null,
-      null,
-      null
-    ],
-    [
-      null,
-      null,
-      null,
-      0
+    "box_owners": [
+      [
+        1,
+        null,
+        null,
+        null
+      ],
+      [
+        1,
+        null,
+        null,
+        null
+      ],
+      [
+        1,
+        1,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null
+      ]
     ]
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        1,
+        1
+      ],
+      [
+        "h",
+        2,
+        2
+      ],
+      [
+        "h",
+        2,
+        3
+      ],
+      [
+        "h",
+        3,
+        2
+      ],
+      [
+        "h",
+        3,
+        3
+      ],
+      [
+        "v",
+        0,
+        2
+      ],
+      [
+        "v",
+        0,
+        3
+      ],
+      [
+        "v",
+        0,
+        4
+      ],
+      [
+        "v",
+        1,
+        2
+      ],
+      [
+        "v",
+        1,
+        4
+      ],
+      [
+        "v",
+        3,
+        0
+      ],
+      [
+        "v",
+        3,
+        1
+      ],
+      [
+        "v",
+        3,
+        3
+      ]
+    ],
+    "total_possible_moves": 40,
+    "moves_made": 27,
+    "remaining_moves": 13
+  },
+  "move_taken": [
+    "h",
+    3,
+    1
   ],
-  "horizontal_lines": [
-    [
-      0,
-      1,
-      1,
-      1
-    ],
-    [
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
-      1,
-      0
-    ],
-    [
-      1,
-      0,
-      null,
-      1
-    ],
-    [
-      null,
-      null,
-      null,
-      0
-    ]
-  ],
-  "vertical_lines": [
-    [
-      null,
-      null,
-      null,
-      null,
-      null
-    ],
-    [
-      0,
-      1,
-      0,
-      0,
-      1
-    ],
-    [
-      1,
-      0,
-      null,
-      null,
-      null
-    ],
-    [
-      1,
-      null,
-      0,
-      0,
-      1
-    ]
-  ],
-  "remaining_lines": 13,
-  "available_moves": [
-    [
-      "h",
-      3,
-      2
-    ],
-    [
-      "h",
-      4,
-      0
-    ],
-    [
-      "h",
-      4,
-      1
-    ],
-    [
-      "h",
-      4,
-      2
-    ],
-    [
-      "v",
-      0,
-      0
-    ],
-    [
-      "v",
-      0,
-      1
-    ],
-    [
-      "v",
-      0,
-      2
-    ],
-    [
-      "v",
-      0,
-      3
-    ],
-    [
-      "v",
-      0,
-      4
-    ],
-    [
-      "v",
-      2,
-      2
-    ],
-    [
-      "v",
-      2,
-      3
-    ],
-    [
-      "v",
-      2,
-      4
-    ],
-    [
-      "v",
-      3,
-      1
-    ]
-  ],
-  "last_move": [
-    "v",
-    2,
-    0
-  ]
+  "move_player": 1,
+  "strategy_info": {
+    "completed_boxes_this_turn": true,
+    "potential_boxes": {
+      "boxes_with_2_edges": 11,
+      "boxes_with_3_edges": 1,
+      "total_potential_boxes": 12
+    },
+    "game_phase": "mid",
+    "score_difference": 4,
+    "is_winning": true
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
 }
