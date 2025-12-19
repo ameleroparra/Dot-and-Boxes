@@ -1,0 +1,159 @@
+{
+  "game_id": 46,
+  "turn": 36,
+  "screenshot": "data/raw/game_46/turn_036.png",
+  "current_player": 0,
+  "player_names": {
+    "0": "red",
+    "1": "blue"
+  },
+  "scores": {
+    "red": 13,
+    "blue": 0
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "vertical_lines": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        1,
+        1
+      ]
+    ],
+    "box_owners": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        null,
+        null,
+        null,
+        0
+      ]
+    ]
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        4,
+        0
+      ],
+      [
+        "h",
+        4,
+        1
+      ],
+      [
+        "h",
+        4,
+        2
+      ],
+      [
+        "v",
+        3,
+        0
+      ],
+      [
+        "v",
+        3,
+        2
+      ]
+    ],
+    "total_possible_moves": 40,
+    "moves_made": 35,
+    "remaining_moves": 5
+  },
+  "move_taken": [
+    "v",
+    2,
+    4
+  ],
+  "move_player": 0,
+  "strategy_info": {
+    "completed_boxes_this_turn": true,
+    "potential_boxes": {
+      "boxes_with_2_edges": 3,
+      "boxes_with_3_edges": 0,
+      "total_potential_boxes": 3
+    },
+    "game_phase": "late",
+    "score_difference": 13,
+    "is_winning": true
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
+}
