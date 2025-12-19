@@ -1,0 +1,169 @@
+{
+  "game_id": 32,
+  "turn": 34,
+  "screenshot": "data/raw/game_32/turn_034.png",
+  "current_player": 1,
+  "player_names": {
+    "0": "red",
+    "1": "blue"
+  },
+  "scores": {
+    "red": 9,
+    "blue": 0
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "vertical_lines": [
+      [
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "box_owners": [
+      [
+        null,
+        null,
+        null,
+        0
+      ],
+      [
+        null,
+        null,
+        null,
+        0
+      ],
+      [
+        null,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        1,
+        0
+      ],
+      [
+        "h",
+        1,
+        2
+      ],
+      [
+        "h",
+        2,
+        0
+      ],
+      [
+        "v",
+        0,
+        2
+      ],
+      [
+        "v",
+        1,
+        1
+      ],
+      [
+        "v",
+        1,
+        2
+      ],
+      [
+        "v",
+        2,
+        0
+      ]
+    ],
+    "total_possible_moves": 40,
+    "moves_made": 33,
+    "remaining_moves": 7
+  },
+  "move_taken": [
+    "h",
+    0,
+    0
+  ],
+  "move_player": 1,
+  "strategy_info": {
+    "completed_boxes_this_turn": false,
+    "potential_boxes": {
+      "boxes_with_2_edges": 4,
+      "boxes_with_3_edges": 2,
+      "total_potential_boxes": 6
+    },
+    "game_phase": "late",
+    "score_difference": 9,
+    "is_winning": false
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
+}
