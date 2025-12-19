@@ -1,0 +1,164 @@
+{
+  "game_id": 30,
+  "turn": 35,
+  "screenshot": "data/raw/game_30/turn_035.png",
+  "current_player": 1,
+  "player_names": {
+    "0": "red",
+    "1": "blue"
+  },
+  "scores": {
+    "red": 2,
+    "blue": 9
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "vertical_lines": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    ],
+    "box_owners": [
+      [
+        1,
+        1,
+        null,
+        0
+      ],
+      [
+        null,
+        null,
+        null,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        null
+      ]
+    ]
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        0,
+        2
+      ],
+      [
+        "h",
+        1,
+        2
+      ],
+      [
+        "v",
+        1,
+        0
+      ],
+      [
+        "v",
+        1,
+        1
+      ],
+      [
+        "v",
+        1,
+        2
+      ],
+      [
+        "v",
+        3,
+        4
+      ]
+    ],
+    "total_possible_moves": 40,
+    "moves_made": 34,
+    "remaining_moves": 6
+  },
+  "move_taken": [
+    "v",
+    2,
+    4
+  ],
+  "move_player": 1,
+  "strategy_info": {
+    "completed_boxes_this_turn": true,
+    "potential_boxes": {
+      "boxes_with_2_edges": 4,
+      "boxes_with_3_edges": 1,
+      "total_potential_boxes": 5
+    },
+    "game_phase": "late",
+    "score_difference": 7,
+    "is_winning": true
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
+}
