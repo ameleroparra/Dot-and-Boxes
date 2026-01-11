@@ -6,7 +6,34 @@ OUT_FILE = "data/lora_train.jsonl"
 
 os.makedirs("data", exist_ok=True)
 
+def is_good_move(state):
+    
+    # Skip if no move was taken
+    if state["move_taken"] is None:
+        return False
+    
+    # include mid-to-late game moves
+    game_phase = state["strategy_info"].get("game_phase", "early")
+    if game_phase == "early":
+        return False
+    
+    # Inlclude moves where player completed boxes
+    if state["strategy_info"].get("completed_boxes_this_turn", 0) > 0:
+        return True
+    
+    # Include moves from late game
+    if game_phase == "late":
+        return True
+    
+    # For mid-game, include moves where there are potential boxes (strategic decisions)
+    potential = state["strategy_info"].get("potential_boxes", {})
+    if potential.get("three_edges", 0) > 0 or potential.get("two_edges", 0) > 1:
+        return True
+    
+    return False  # Skip otherwise
+
 samples = []
+skipped = 0
 
 for game in sorted(os.listdir(RAW_DIR)):
     game_dir = os.path.join(RAW_DIR, game)
@@ -20,8 +47,8 @@ for game in sorted(os.listdir(RAW_DIR)):
         with open(os.path.join(game_dir, file), "r") as f:
             state = json.load(f)
 
-        # Skip turns with no move
-        if state["move_taken"] is None:
+        if not is_good_move(state):
+            skipped += 1
             continue
 
         img_path = state["screenshot"]
@@ -31,8 +58,8 @@ for game in sorted(os.listdir(RAW_DIR)):
         moves_str = ", ".join([f"{m[0]} {m[1]} {m[2]}" for m in available])
 
         prompt = (
-            "You are playing Dots and Boxes.\n"
-            "Choose one move from this list:\n"
+            "You are playing Dots and Boxes. "
+            "Choose the best move from this list:\n"
             f"{moves_str}\n"
             "Respond in the format: <type> <i> <j>"
         )
@@ -49,4 +76,6 @@ with open(OUT_FILE, "w") as f:
     for s in samples:
         f.write(json.dumps(s) + "\n")
 
-print(f"Saved {len(samples)} samples to {OUT_FILE}")
+print(f"✓ Saved {len(samples)} high-quality samples to {OUT_FILE}")
+print(f"  Skipped {skipped} low-quality samples (early game random moves)")
+print(f"  Training data quality: {len(samples)/(len(samples)+skipped)*100:.1f}%")
