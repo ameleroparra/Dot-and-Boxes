@@ -58,8 +58,8 @@ for game in sorted(os.listdir(RAW_DIR)):
         moves_str = ", ".join([f"{m[0]} {m[1]} {m[2]}" for m in available])
 
         prompt = (
-            "You are playing Dots and Boxes. "
-            "Choose the best move from this list:\n"
+            "You are playing Dots and Boxes and must prioritize chain control by using the 'Double-Cross' strategy, sacrificing the end of a current chain to force your opponent to open the next segment so you can capture the final, longest chain; Avoid when possible placing the third edge on a square that has already 2 edges."
+            "Select the best move from this list:\n"
             f"{moves_str}\n"
             "Respond in the format: <type> <i> <j>"
         )
