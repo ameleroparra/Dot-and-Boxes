@@ -54,6 +54,9 @@ for game in sorted(os.listdir(RAW_DIR)):
         img_path = state["screenshot"]
         move = state["move_taken"]
         available = state["move_info"]["available_moves"] + [move]
+        
+        # Sort moves so answer isn't always last
+        available = sorted(available, key=lambda m: (m[0], m[1], m[2]))
 
         moves_str = ", ".join([f"{m[0]} {m[1]} {m[2]}" for m in available])
 
