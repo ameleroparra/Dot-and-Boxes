@@ -1,0 +1,154 @@
+{
+  "game_id": 44,
+  "turn": 37,
+  "screenshot": "data/raw/game_44/turn_037.png",
+  "current_player": 0,
+  "player_names": {
+    "0": "red",
+    "1": "blue"
+  },
+  "scores": {
+    "red": 4,
+    "blue": 8
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "vertical_lines": [
+      [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "box_owners": [
+      [
+        null,
+        null,
+        0,
+        0
+      ],
+      [
+        0,
+        null,
+        null,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        1,
+        1
+      ],
+      [
+        "v",
+        0,
+        0
+      ],
+      [
+        "v",
+        0,
+        1
+      ],
+      [
+        "v",
+        1,
+        2
+      ]
+    ],
+    "total_possible_moves": 40,
+    "moves_made": 36,
+    "remaining_moves": 4
+  },
+  "move_taken": [
+    "h",
+    1,
+    2
+  ],
+  "move_player": 0,
+  "strategy_info": {
+    "completed_boxes_this_turn": false,
+    "potential_boxes": {
+      "boxes_with_2_edges": 3,
+      "boxes_with_3_edges": 1,
+      "total_potential_boxes": 4
+    },
+    "game_phase": "late",
+    "score_difference": 4,
+    "is_winning": false
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
+}

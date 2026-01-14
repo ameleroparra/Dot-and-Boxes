@@ -1,0 +1,136 @@
+{
+  "game_id": 44,
+  "turn": 41,
+  "screenshot": "data/raw/game_44/turn_041.png",
+  "current_player": 0,
+  "player_names": {
+    "0": "red",
+    "1": "blue"
+  },
+  "scores": {
+    "red": 8,
+    "blue": 8
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "vertical_lines": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "box_owners": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "move_info": {
+    "available_moves": [],
+    "total_possible_moves": 40,
+    "moves_made": 40,
+    "remaining_moves": 0
+  },
+  "move_taken": [
+    "v",
+    0,
+    0
+  ],
+  "move_player": 0,
+  "strategy_info": {
+    "completed_boxes_this_turn": false,
+    "potential_boxes": {
+      "boxes_with_2_edges": 0,
+      "boxes_with_3_edges": 0,
+      "total_potential_boxes": 0
+    },
+    "game_phase": "late",
+    "score_difference": 0,
+    "is_winning": false
+  },
+  "result": {
+    "game_completed": true,
+    "final_scores": {
+      "red": 8,
+      "blue": 8
+    },
+    "winner": "tie"
+  }
+}

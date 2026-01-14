@@ -1,0 +1,149 @@
+{
+  "game_id": 44,
+  "turn": 38,
+  "screenshot": "data/raw/game_44/turn_038.png",
+  "current_player": 0,
+  "player_names": {
+    "0": "red",
+    "1": "blue"
+  },
+  "scores": {
+    "red": 5,
+    "blue": 8
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "vertical_lines": [
+      [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "box_owners": [
+      [
+        null,
+        null,
+        0,
+        0
+      ],
+      [
+        0,
+        null,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        1,
+        1
+      ],
+      [
+        "v",
+        0,
+        0
+      ],
+      [
+        "v",
+        0,
+        1
+      ]
+    ],
+    "total_possible_moves": 40,
+    "moves_made": 37,
+    "remaining_moves": 3
+  },
+  "move_taken": [
+    "v",
+    1,
+    2
+  ],
+  "move_player": 0,
+  "strategy_info": {
+    "completed_boxes_this_turn": false,
+    "potential_boxes": {
+      "boxes_with_2_edges": 2,
+      "boxes_with_3_edges": 1,
+      "total_potential_boxes": 3
+    },
+    "game_phase": "late",
+    "score_difference": 3,
+    "is_winning": false
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
+}
