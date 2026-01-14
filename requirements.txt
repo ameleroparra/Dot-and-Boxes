@@ -1,0 +1,8 @@
+# Core dependencies
+pygame-ce
+
+# Qwen3-VL dependencies
+transformers>=4.57.0
+torch
+pillow
+accelerate
