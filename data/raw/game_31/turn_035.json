@@ -1,0 +1,164 @@
+{
+  "game_id": 31,
+  "turn": 35,
+  "screenshot": "data/raw/game_31/turn_035.png",
+  "current_player": 1,
+  "player_names": {
+    "0": "red",
+    "1": "blue"
+  },
+  "scores": {
+    "red": 0,
+    "blue": 11
+  },
+  "board_state": {
+    "grid_size": 4,
+    "horizontal_lines": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        1
+      ]
+    ],
+    "vertical_lines": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    ],
+    "box_owners": [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        null,
+        1,
+        1,
+        null
+      ],
+      [
+        null,
+        1,
+        null,
+        null
+      ]
+    ]
+  },
+  "move_info": {
+    "available_moves": [
+      [
+        "h",
+        3,
+        0
+      ],
+      [
+        "h",
+        3,
+        3
+      ],
+      [
+        "h",
+        4,
+        0
+      ],
+      [
+        "v",
+        2,
+        0
+      ],
+      [
+        "v",
+        2,
+        4
+      ],
+      [
+        "v",
+        3,
+        3
+      ]
+    ],
+    "total_possible_moves": 40,
+    "moves_made": 34,
+    "remaining_moves": 6
+  },
+  "move_taken": [
+    "h",
+    3,
+    2
+  ],
+  "move_player": 1,
+  "strategy_info": {
+    "completed_boxes_this_turn": false,
+    "potential_boxes": {
+      "boxes_with_2_edges": 4,
+      "boxes_with_3_edges": 1,
+      "total_potential_boxes": 5
+    },
+    "game_phase": "late",
+    "score_difference": 11,
+    "is_winning": true
+  },
+  "result": {
+    "game_completed": false,
+    "final_scores": null,
+    "winner": null
+  }
+}

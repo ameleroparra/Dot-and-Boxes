@@ -4,38 +4,6 @@ import os
 import json
 import random
 
-# Import VLM classes (lazy initialization - only load when needed)
-vlm = None
-vlm_finetuned = None
-
-def initialize_base_vlm():
-    """Initialize base VLM model only when needed."""
-    global vlm
-    if vlm is None:
-        try:
-            print("Loading base VLM model...")
-            from vlm import VLM
-            vlm = VLM()
-            print("✓ Base VLM loaded successfully!")
-        except Exception as e:
-            print("Warning: VLM initialization failed:", e)
-            vlm = None
-    return vlm
-
-def initialize_finetuned_vlm():
-    """Initialize fine-tuned VLM model only when needed."""
-    global vlm_finetuned
-    if vlm_finetuned is None:
-        try:
-            print("Loading fine-tuned VLM model...")
-            from vlm_finetuned import VLMFineTuned
-            vlm_finetuned = VLMFineTuned()
-            print("✓ Fine-tuned VLM loaded successfully!")
-        except Exception as e:
-            print("Warning: Fine-tuned VLM initialization failed:", e)
-            vlm_finetuned = None
-    return vlm_finetuned
-
 pygame.init()
 
 # Constants
@@ -68,18 +36,6 @@ current_player = 0
 total_lines = (GRID_SIZE + 1) * GRID_SIZE + GRID_SIZE * (GRID_SIZE + 1)
 lines_drawn = 0
 
-def reset_game_state():
-    """Reset game state for a new match."""
-    global horizontal_lines, vertical_lines, boxes, scores, current_player, lines_drawn, game_id, turn
-    horizontal_lines = [[None] * GRID_SIZE for _ in range(GRID_SIZE + 1)]
-    vertical_lines = [[None] * (GRID_SIZE + 1) for _ in range(GRID_SIZE)]
-    boxes = [[None] * GRID_SIZE for _ in range(GRID_SIZE)]
-    scores = [0, 0]
-    current_player = 0
-    lines_drawn = 0
-    game_id = get_next_game_id()
-    turn = 0
-
 # Screenshot tracking
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, "data", "raw")
@@ -108,38 +64,34 @@ def run_menu():
     title_font = pygame.font.Font(None, 72)
     btn_font = pygame.font.Font(None, 48)
 
-    btn_width, btn_height = 350, 60
+    btn_width, btn_height = 300, 70
     btn_x = WIDTH // 2 - btn_width // 2 # center horizontally
-    spacing_between = 15
-    total_height = btn_height * 5 + spacing_between * 4
+    spacing_between = 20
+    total_height = btn_height * 4 + spacing_between * 3
     start_y = HEIGHT // 2 - total_height // 2
 
     btn_y1 = start_y
     btn_y2 = start_y + btn_height + spacing_between
     btn_y3 = start_y + 2 * (btn_height + spacing_between)
     btn_y4 = start_y + 3 * (btn_height + spacing_between)
-    btn_y5 = start_y + 4 * (btn_height + spacing_between)
 
     rect_1_v_1 = pygame.Rect(btn_x, btn_y1, btn_width, btn_height)
     rect_1_v_bot = pygame.Rect(btn_x, btn_y2, btn_width, btn_height)
     rect_bot_vs_vlm = pygame.Rect(btn_x, btn_y3, btn_width, btn_height)
-    rect_bot_vs_vlm_ft = pygame.Rect(btn_x, btn_y4, btn_width, btn_height)
-    rect_exit = pygame.Rect(btn_x, btn_y5, btn_width, btn_height)
+    rect_exit = pygame.Rect(btn_x, btn_y4, btn_width, btn_height)
 
     # Text surfaces and positions
     title_surf = title_font.render("Dots and Boxes", True, (0, 0, 0))
-    title_pos = (WIDTH // 2 - title_surf.get_width() // 2, 50)
+    title_pos = (WIDTH // 2 - title_surf.get_width() // 2, 80)
 
     text_1v1 = btn_font.render("1 vs 1", True, BUTTON_TEXT_COLOR)
     text_1_v_bot = btn_font.render("1 vs Bot", True, BUTTON_TEXT_COLOR)
-    text_bot_vs_vlm = btn_font.render("Bot vs VLM (Base)", True, BUTTON_TEXT_COLOR)
-    text_bot_vs_vlm_ft = btn_font.render("Bot vs VLM (Fine-tuned)", True, BUTTON_TEXT_COLOR)
+    text_bot_vs_vlm = btn_font.render("Bot vs VLM", True, BUTTON_TEXT_COLOR)
     text_exit = btn_font.render("Exit", True, BUTTON_TEXT_COLOR)
 
     text_1v1_rect = text_1v1.get_rect(center=rect_1_v_1.center)
     text_1_v_bot_rect = text_1_v_bot.get_rect(center=rect_1_v_bot.center)
     text_bot_vs_vlm_rect = text_bot_vs_vlm.get_rect(center=rect_bot_vs_vlm.center)
-    text_bot_vs_vlm_ft_rect = text_bot_vs_vlm_ft.get_rect(center=rect_bot_vs_vlm_ft.center)
     text_exit_rect = text_exit.get_rect(center=rect_exit.center)
 
     while True:
@@ -150,8 +102,6 @@ def run_menu():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if rect_1_v_1.collidepoint(event.pos):
                     return '1v1'
-                if rect_bot_vs_vlm_ft.collidepoint(event.pos):
-                    return 'BotvVLMFineTuned'
                 if rect_1_v_bot.collidepoint(event.pos):
                     return '1vBot'
                 if rect_bot_vs_vlm.collidepoint(event.pos):
@@ -167,72 +117,13 @@ def run_menu():
         pygame.draw.rect(screen, BUTTON_HOVER if rect_1_v_1.collidepoint(mouse_pos) else BUTTON_COLOR, rect_1_v_1)
         pygame.draw.rect(screen, BUTTON_HOVER if rect_1_v_bot.collidepoint(mouse_pos) else BUTTON_COLOR, rect_1_v_bot)
         pygame.draw.rect(screen, BUTTON_HOVER if rect_bot_vs_vlm.collidepoint(mouse_pos) else BUTTON_COLOR, rect_bot_vs_vlm)
-        pygame.draw.rect(screen, BUTTON_HOVER if rect_bot_vs_vlm_ft.collidepoint(mouse_pos) else BUTTON_COLOR, rect_bot_vs_vlm_ft)
         pygame.draw.rect(screen, BUTTON_HOVER if rect_exit.collidepoint(mouse_pos) else BUTTON_COLOR, rect_exit)
 
         screen.blit(text_1v1, text_1v1_rect.topleft)
         screen.blit(text_1_v_bot, text_1_v_bot_rect.topleft)
         screen.blit(text_bot_vs_vlm, text_bot_vs_vlm_rect.topleft)
-        screen.blit(text_bot_vs_vlm_ft, text_bot_vs_vlm_ft_rect.topleft)
         screen.blit(text_exit, text_exit_rect.topleft)
 
-        pygame.display.flip()
-        clock.tick(60)
-
-def show_play_again_menu():
-    """Show play again menu after game ends."""
-    clock = pygame.time.Clock()
-    font = pygame.font.Font(None, 48)
-    
-    btn_width, btn_height = 250, 60
-    btn_x = WIDTH // 2 - btn_width // 2
-    btn_y1 = HEIGHT // 2 - 100
-    btn_y2 = HEIGHT // 2
-    btn_y3 = HEIGHT // 2 + 100
-    
-    rect_replay = pygame.Rect(btn_x, btn_y1, btn_width, btn_height)
-    rect_menu = pygame.Rect(btn_x, btn_y2, btn_width, btn_height)
-    rect_exit = pygame.Rect(btn_x, btn_y3, btn_width, btn_height)
-    
-    text_replay = font.render("Play Again", True, BUTTON_TEXT_COLOR)
-    text_menu = font.render("Main Menu", True, BUTTON_TEXT_COLOR)
-    text_exit = font.render("Exit", True, BUTTON_TEXT_COLOR)
-    
-    text_replay_rect = text_replay.get_rect(center=rect_replay.center)
-    text_menu_rect = text_menu.get_rect(center=rect_menu.center)
-    text_exit_rect = text_exit.get_rect(center=rect_exit.center)
-    
-    while True:
-        mouse_pos = pygame.mouse.get_pos()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return "exit"
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_replay.collidepoint(event.pos):
-                    return "replay"
-                if rect_menu.collidepoint(event.pos):
-                    return "menu"
-                if rect_exit.collidepoint(event.pos):
-                    return "exit"
-        
-        # Draw current board as background (faded)
-        draw_board()
-        
-        # Draw semi-transparent overlay
-        overlay = pygame.Surface((WIDTH, HEIGHT))
-        overlay.set_alpha(200)
-        overlay.fill((255, 255, 255))
-        screen.blit(overlay, (0, 0))
-        
-        # Draw buttons
-        pygame.draw.rect(screen, BUTTON_HOVER if rect_replay.collidepoint(mouse_pos) else BUTTON_COLOR, rect_replay)
-        pygame.draw.rect(screen, BUTTON_HOVER if rect_menu.collidepoint(mouse_pos) else BUTTON_COLOR, rect_menu)
-        pygame.draw.rect(screen, BUTTON_HOVER if rect_exit.collidepoint(mouse_pos) else BUTTON_COLOR, rect_exit)
-        
-        screen.blit(text_replay, text_replay_rect.topleft)
-        screen.blit(text_menu, text_menu_rect.topleft)
-        screen.blit(text_exit, text_exit_rect.topleft)
-        
         pygame.display.flip()
         clock.tick(60)
 
@@ -388,6 +279,7 @@ def will_create_third_edge(line_type, i, j):
     return creates_third
 
 def bot_move():  # Here the bot choose what to do with simple code
+    import random
     available = get_available_moves()
     if not available:
         return None
@@ -445,6 +337,7 @@ def save_turn_screenshot():
     os.makedirs(game_dir, exist_ok=True)
     screenshot_path = os.path.join(game_dir, f"turn_{turn:03}.png")
     pygame.image.save(screen, screenshot_path)
+    print(f"Screenshot saved: {screenshot_path}")
     return screenshot_path
 
 def save_game_state_json(last_move=None, completed_this_turn=False):
@@ -510,7 +403,9 @@ def save_game_state_json(last_move=None, completed_this_turn=False):
 
     with open(state_path, "w", encoding="utf-8") as f:
         json.dump(convert(state), f, indent=2)
+    print(f"Game state saved: {state_path}")
     return state_path
+
 
 def count_potential_boxes():
     two_edges = 0
@@ -531,60 +426,6 @@ def count_potential_boxes():
         "total_potential_boxes": two_edges + three_edges
     }
 
-def safe_vlm_predict_move(img_path, candidate_moves):
-    if vlm is None:
-        return random.choice(candidate_moves) if candidate_moves else None
-
-    try:
-        move = vlm.predict_move(img_path, candidate_moves)
-    except Exception as e:
-        print("VLM predict error:", e)
-        move = None
-
-    if is_valid_move(move):
-        return move
-
-    if isinstance(move, str):
-        parts = [p.strip() for p in move.replace(",", " ").split()]
-        if len(parts) == 3 and parts[0] in ("h", "v"):
-            try:
-                mi, mj = int(parts[1]), int(parts[2])
-                parsed = (parts[0], mi, mj)
-                if is_valid_move(parsed):
-                    return parsed
-            except Exception:
-                pass
-
-    print("VLM returned invalid move.")
-    return random.choice(candidate_moves) if candidate_moves else None
-
-def safe_vlm_finetuned_predict_move(img_path, candidate_moves):
-    if vlm_finetuned is None:
-        return random.choice(candidate_moves) if candidate_moves else None
-
-    try:
-        move = vlm_finetuned.predict_move(img_path, candidate_moves)
-    except Exception as e:
-        print("Fine-tuned VLM predict error:", e)
-        move = None
-
-    if is_valid_move(move):
-        return move
-
-    if isinstance(move, str):
-        parts = [p.strip() for p in move.replace(",", " ").split()]
-        if len(parts) == 3 and parts[0] in ("h", "v"):
-            try:
-                mi, mj = int(parts[1]), int(parts[2])
-                parsed = (parts[0], mi, mj)
-                if is_valid_move(parsed):
-                    return parsed
-            except Exception:
-                pass
-
-    print("Fine-tuned VLM returned invalid move.")
-    return random.choice(candidate_moves) if candidate_moves else None
-
 def is_valid_move(move):
     if move is None:
         return False
@@ -603,172 +444,88 @@ def is_valid_move(move):
             return vertical_lines[i][j] is None
         return False
 
-# Main application loop - keeps models loaded
-app_running = True
-while app_running:
-    # Show start menu
-    mode = run_menu()
-    if not mode:
-        break
 
-    # Initialize models based on selected mode (lazy loading - only once per app session)
-    if mode == 'BotvVLM' and vlm is None:
-        initialize_base_vlm()
-    elif mode == 'BotvVLMFineTuned' and vlm_finetuned is None:
-        initialize_finetuned_vlm()
+# Show start menu at start
+mode = run_menu()
+if not mode:
+    pygame.quit()
+    sys.exit()
 
-    # Reset game state for new match
-    reset_game_state()
+# Main game loop
+running = True
+clock = pygame.time.Clock()
 
-    # Main game loop
-    running = True
-    clock = pygame.time.Clock()
+# Draw initial board and save screenshot + JSON
+draw_board()
+last_screenshot = save_turn_screenshot()
+save_game_state_json(last_move=None)
 
-    # Draw initial board and save screenshot + JSON
+while running:
     draw_board()
-    last_screenshot = save_turn_screenshot()
-    save_game_state_json(last_move=None, completed_this_turn=False)
 
-    while running:
-        draw_board()
+    # Bot turn
+    if (mode == '1vBot' and current_player == 1) and lines_drawn < total_lines:
+        pygame.time.wait(300)  # delay for better experience
+        bot_move_result = bot_move()
+        if bot_move_result:
+            line_type, i, j = bot_move_result
+            apply_move(line_type, i, j, current_player)
 
-        # Bot turn
-        if ((mode == '1vBot' and current_player == 1) or 
-            (mode == 'BotvVLM' and current_player == 0) or 
-            (mode == 'BotvVLMFineTuned' and current_player == 0)) and lines_drawn < total_lines:
-            pygame.time.wait(300)  # delay for better experience
-            bot_move_result = bot_move()
-            if bot_move_result:
-                line_type, i, j = bot_move_result
-                apply_move(line_type, i, j, current_player)
-
-                # Check for completed boxes
-                completed = check_completed_boxes()
-                draw_board()
-                last_screenshot = save_turn_screenshot()
-                save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
-
-                # Switch player only if no box was completed
-                if not completed:
-                    current_player = 1 - current_player
-
-        # VLM turn (base model)
-        if mode == 'BotvVLM' and current_player == 1 and lines_drawn < total_lines:
-            pygame.time.wait(300)
-            available = get_available_moves()
-
-            vlm_move = safe_vlm_predict_move(last_screenshot, available)
-
-            if vlm_move:
-                line_type, i, j = vlm_move
-                apply_move(line_type, i, j, current_player)
-
-                completed = check_completed_boxes()
-                draw_board()
-                last_screenshot = save_turn_screenshot()
-                save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
-
-                if not completed:
-                    current_player = 1 - current_player
-            else:
-                fallback = bot_move()
-                if fallback:
-                    line_type, i, j = fallback
-                    apply_move(line_type, i, j, current_player)
-                    completed = check_completed_boxes()
-                    draw_board()
-                    last_screenshot = save_turn_screenshot()
-                    save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
-                    if not completed:
-                        current_player = 1 - current_player
-
-        # Fine-tuned VLM turn
-        if mode == 'BotvVLMFineTuned' and current_player == 1 and lines_drawn < total_lines:
-            pygame.time.wait(300)
-            available = get_available_moves()
-
-            vlm_ft_move = safe_vlm_finetuned_predict_move(last_screenshot, available)
-
-            if vlm_ft_move:
-                line_type, i, j = vlm_ft_move
-                apply_move(line_type, i, j, current_player)
-
-                completed = check_completed_boxes()
-                draw_board()
-                last_screenshot = save_turn_screenshot()
-                save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
-
-                if not completed:
-                    current_player = 1 - current_player
-            else:
-                fallback = bot_move()
-                if fallback:
-                    line_type, i, j = fallback
-                    apply_move(line_type, i, j, current_player)
-                    completed = check_completed_boxes()
-                    draw_board()
-                    last_screenshot = save_turn_screenshot()
-                    save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
-                    if not completed:
-                        current_player = 1 - current_player
-
-        # Player turn
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if mode == '1v1':
-                    line = get_line_clicked(event.pos)
-                    if line:
-                        line_type, i, j = line
-                        apply_move(line_type, i, j, current_player)
-
-                        # Check for completed boxes FIRST (this fills the boxes)
-                        completed = check_completed_boxes()
-
-                        # THEN draw the board with colored boxes and save screenshot
-                        draw_board()
-                        last_screenshot = save_turn_screenshot()
-                        save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
-                        if not completed:
-                            current_player = 1 - current_player
-
-                elif mode == '1vBot' and current_player == 0:
-                    # human is Red (player 0)
-                    line = get_line_clicked(event.pos)
-                    if line:
-                        line_type, i, j = line
-                        apply_move(line_type, i, j, current_player)
-                        completed = check_completed_boxes()
-                        draw_board()
-                        last_screenshot = save_turn_screenshot()
-                        save_game_state_json(last_move=(line_type, i, j), completed_this_turn=completed)
-                        if not completed:
-                            current_player = 1 - current_player
-
-        # Check for game over
-        if lines_drawn == total_lines:
+            # Check for completed boxes
+            completed = check_completed_boxes()
             draw_board()
-            pygame.time.wait(1000)
-            print("Game Over!")
-            print(f"Final Scores → Red: {scores[0]}, Blue: {scores[1]}")
             last_screenshot = save_turn_screenshot()
-            save_game_state_json(last_move=None, completed_this_turn=False)
-            
-            # Show "Play Again" option
-            choice = show_play_again_menu()
-            if choice == "replay":
-                # Reset and play again with same mode
-                break  # Break from game loop, app loop will reset
-            elif choice == "menu":
-                # Go to main menu
-                break  # Break from game loop to show menu
-            else:
-                # Exit application
-                app_running = False
-                break
+            save_game_state_json(last_move=(line_type, i, j))
 
-        clock.tick(30)  # Limit to 30 FPS so its run better
+            # Switch player only if no box was completed
+            if not completed:
+                current_player = 1 - current_player
+
+    # PLayer turn
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if mode == '1v1':
+                line = get_line_clicked(event.pos)
+                if line:
+                    line_type, i, j = line
+                    apply_move(line_type, i, j, current_player)
+
+                    # Check for completed boxes FIRST (this fills the boxes)
+                    completed = check_completed_boxes()
+
+                    # THEN draw the board with colored boxes and save screenshot
+                    draw_board()
+                    last_screenshot = save_turn_screenshot()
+                    save_game_state_json(last_move=(line_type, i, j))
+                    if not completed:
+                        current_player = 1 - current_player
+
+            elif mode == '1vBot' and current_player == 0:
+                # human is Red (player 0)
+                line = get_line_clicked(event.pos)
+                if line:
+                    line_type, i, j = line
+                    apply_move(line_type, i, j, current_player)
+                    completed = check_completed_boxes()
+                    draw_board()
+                    last_screenshot = save_turn_screenshot()
+                    save_game_state_json(last_move=(line_type, i, j))
+                    if not completed:
+                        current_player = 1 - current_player
+
+    # Check for game over
+    if lines_drawn == total_lines:
+        draw_board()
+        pygame.time.wait(1000)
+        print("Game Over!")
+        print(f"Final Scores → Red: {scores[0]}, Blue: {scores[1]}")
+        last_screenshot = save_turn_screenshot()
+        save_game_state_json(last_move=None)
+        running = False
+
+    clock.tick(30)  # Limit to 30 FPS so its run better
 
 pygame.quit()
 sys.exit()
