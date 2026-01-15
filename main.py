@@ -3,11 +3,10 @@ import sys
 import os
 import json
 import random
-from ai_player import AIPlayer
 
 pygame.init()
 
-# Initialize AI player if needed
+# AI player (loaded on demand)
 ai_player = None
 
 # Constants
@@ -282,17 +281,7 @@ def will_create_third_edge(line_type, i, j):
 
     return creates_third
 
-def vlm_move(screenshot_path):
-    """Get move from VLM AI."""
-    response = ai_player.get_move(screenshot_path)
-    print(f"VLM response: {response}")
-    # For now, just pick a random move since VLM response needs parsing
-    # TODO: Parse VLM response properly
-    available = get_available_moves()
-    return random.choice(available) if available else None
-
 def bot_move():  # Here the bot choose what to do with simple code
-    import random
     available = get_available_moves()
     if not available:
         return None
@@ -352,7 +341,6 @@ def save_turn_screenshot():
     os.makedirs(game_dir, exist_ok=True)
     screenshot_path = os.path.join(game_dir, f"turn_{turn:03}.png")
     pygame.image.save(screen, screenshot_path)
-    print(f"Screenshot saved: {screenshot_path}")
     return screenshot_path
 
 def save_game_state_json(last_move=None, completed_this_turn=False):
@@ -417,7 +405,6 @@ def save_game_state_json(last_move=None, completed_this_turn=False):
 
     with open(state_path, "w", encoding="utf-8") as f:
         json.dump(convert(state), f, indent=2)
-    print(f"Game state saved: {state_path}")
     return state_path
 
 def count_potential_boxes():
@@ -454,13 +441,7 @@ def is_valid_move(move):
     else:
         if 0 <= i < GRID_SIZE and 0 <= j <= GRID_SIZE:
             return vertical_lines[i][j] is None
-  Load AI if playing against VLM
-if mode == 'BotvVLM':
-    print("Loading VLM... this may take a moment")
-    ai_player = AIPlayer()
-    print("VLM loaded!")
-
-#       return False
+        return False
 
 
 # Show start menu at start
@@ -469,18 +450,29 @@ if not mode:
     pygame.quit()
     sys.exit()
 
+# Load VLM if playing Bot vs VLM
+if mode == 'BotvVLM':
+    from ai_player import AIPlayer
+    ai_player = AIPlayer()
+
 # Main game loop
 running = True
 clock = pygame.time.Clock()
 
 # Draw initial board and save screenshot + JSON
 draw_board()
-last_sVLM turn
-    if mode == 'BotvVLM' and current_player == 1 and lines_drawn < total_lines:
-        pygame.time.wait(500)
-        vlm_move_result = vlm_move(last_screenshot)
-        if vlm_move_result:
-            line_type, i, j = vlm_move_result
+last_screenshot = save_turn_screenshot()
+save_game_state_json(last_move=None)
+
+while running:
+    draw_board()
+
+    # Bot turn (Red player in Bot vs VLM mode)
+    if mode == 'BotvVLM' and current_player == 0 and lines_drawn < total_lines:
+        pygame.time.wait(300)
+        bot_move_result = bot_move()
+        if bot_move_result:
+            line_type, i, j = bot_move_result
             apply_move(line_type, i, j, current_player)
             completed = check_completed_boxes()
             draw_board()
@@ -489,14 +481,56 @@ last_sVLM turn
             if not completed:
                 current_player = 1 - current_player
 
-    # Bot turn
-    el_game_state_json(last_move=None)
+    # VLM turn (Blue player)
+    elif mode == 'BotvVLM' and current_player == 1 and lines_drawn < total_lines:
+        pygame.time.wait(500)
+        
+        # Get current turn JSON path
+        json_path = os.path.join(DATA_DIR, f"game_{game_id}", f"turn_{turn:03}.json")
+        
+        # Ask VLM for move
+        vlm_result = ai_player.get_move(last_screenshot, json_path)
+        
+        valid = False
+        if vlm_result:
+            line_type, i, j = vlm_result
+            print(f"DEBUG: VLM returned: {line_type} {i} {j}")
+            
+            # Validate and apply move
+            if line_type == 'h' and 0 <= i <= GRID_SIZE and 0 <= j < GRID_SIZE:
+                if horizontal_lines[i][j] is None:
+                    valid = True
+            elif line_type == 'v' and 0 <= i < GRID_SIZE and 0 <= j <= GRID_SIZE:
+                if vertical_lines[i][j] is None:
+                    valid = True
+            
+            if valid:
+                print(f"DEBUG: Applying move: {line_type} {i} {j}")
+                apply_move(line_type, i, j, current_player)
+                completed = check_completed_boxes()
+                draw_board()
+                last_screenshot = save_turn_screenshot()
+                save_game_state_json(last_move=(line_type, i, j))
+                if not completed:
+                    current_player = 1 - current_player
+            else:
+                print(f"Invalid VLM move: {line_type} {i} {j}")
+        
+        # Fallback to random if VLM fails or gave invalid move
+        if not valid:
+            available = get_available_moves()
+            if available:
+                line_type, i, j = random.choice(available)
+                apply_move(line_type, i, j, current_player)
+                completed = check_completed_boxes()
+                draw_board()
+                last_screenshot = save_turn_screenshot()
+                save_game_state_json(last_move=(line_type, i, j))
+                if not completed:
+                    current_player = 1 - current_player
 
-while running:
-    draw_board()
-
     # Bot turn
-    if (mode == '1vBot' and current_player == 1) and lines_drawn < total_lines:
+    elif (mode == '1vBot' and current_player == 1) and lines_drawn < total_lines:
         pygame.time.wait(300)  # delay for better experience
         bot_move_result = bot_move()
         if bot_move_result:
