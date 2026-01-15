@@ -10,8 +10,7 @@ from transformers import (
     AutoModelForImageTextToText,
     AutoProcessor,
     Trainer,
-    TrainingArguments,
-    TrainerCallback
+    TrainingArguments
 )
 from peft import LoraConfig, get_peft_model, TaskType
 from torch.utils.data import Dataset
