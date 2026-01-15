@@ -1,11 +1,25 @@
 # Dots and Boxes Game
 
-A Dots and Boxes game implementation with screenshot capture functionality for dataset collection.
+A Dots and Boxes game that uses Qwen3 to implement a finetuned VLM that knows how to play the game (in theory).
 
-## Installation
+## Create and run your environment
 
 ```bash
-pip install pygame
+# In Windows
+python -m venv env
+
+.\env\Scripts\Activate.ps1
+
+pip install -r requirements.txt
+
+
+
+# In Linux
+python -m venv env
+
+source env/bin/activate
+
+pip install -r requirements.txt
 ```
 
 ## Usage
