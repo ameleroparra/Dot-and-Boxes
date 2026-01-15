@@ -4,5 +4,13 @@ pygame-ce
 # Qwen3-VL dependencies
 transformers>=4.57.0
 torch
+accelerate>=0.20.0
 pillow
-accelerate
+
+# LoRA fine-tuning
+peft>=0.7.0
+bitsandbytes>=0.41.0
+
+# Training utilities
+tensorboard
+datasets
