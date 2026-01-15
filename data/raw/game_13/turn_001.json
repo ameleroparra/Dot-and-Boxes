@@ -310,11 +310,9 @@
     "remaining_moves": 40
   },
   "move_taken": null,
-  "move_player": null,
   "strategy_info": {
     "completed_boxes_this_turn": false,
     "potential_boxes": {
-      "boxes_with_2_edges": 0,
       "boxes_with_3_edges": 0,
       "total_potential_boxes": 0
     },

@@ -113,11 +113,9 @@
     0,
     4
   ],
-  "move_player": 1,
   "strategy_info": {
     "completed_boxes_this_turn": true,
     "potential_boxes": {
-      "boxes_with_2_edges": 0,
       "boxes_with_3_edges": 0,
       "total_potential_boxes": 0
     },

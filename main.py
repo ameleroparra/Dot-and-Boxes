@@ -384,7 +384,6 @@ def save_game_state_json(last_move=None, completed_this_turn=False):
         },
 
         "move_taken": last_move,
-        "move_player": current_player if last_move else None,
 
         "strategy_info": {
             "completed_boxes_this_turn": completed_this_turn,
@@ -435,9 +434,8 @@ def count_potential_boxes():
                     three_edges += 1
 
     return {
-        "boxes_with_2_edges": two_edges,
         "boxes_with_3_edges": three_edges,
-        "total_potential_boxes": two_edges + three_edges
+        "total_potential_boxes": three_edges
     }
 
 def is_valid_move(move):

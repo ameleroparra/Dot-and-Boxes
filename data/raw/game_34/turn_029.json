@@ -174,13 +174,11 @@
     2,
     3
   ],
-  "move_player": 1,
   "strategy_info": {
     "completed_boxes_this_turn": false,
     "potential_boxes": {
-      "boxes_with_2_edges": 9,
       "boxes_with_3_edges": 2,
-      "total_potential_boxes": 11
+      "total_potential_boxes": 2
     },
     "game_phase": "late",
     "score_difference": 4,

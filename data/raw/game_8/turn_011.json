@@ -264,13 +264,11 @@
     2,
     4
   ],
-  "move_player": 1,
   "strategy_info": {
     "completed_boxes_this_turn": false,
     "potential_boxes": {
-      "boxes_with_2_edges": 5,
       "boxes_with_3_edges": 0,
-      "total_potential_boxes": 5
+      "total_potential_boxes": 0
     },
     "game_phase": "early",
     "score_difference": 0,

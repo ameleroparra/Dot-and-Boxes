@@ -199,13 +199,11 @@
     4,
     1
   ],
-  "move_player": 0,
   "strategy_info": {
     "completed_boxes_this_turn": true,
     "potential_boxes": {
-      "boxes_with_2_edges": 11,
       "boxes_with_3_edges": 1,
-      "total_potential_boxes": 12
+      "total_potential_boxes": 1
     },
     "game_phase": "mid",
     "score_difference": 3,

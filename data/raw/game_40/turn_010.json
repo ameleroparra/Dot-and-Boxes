@@ -269,13 +269,11 @@
     2,
     3
   ],
-  "move_player": 0,
   "strategy_info": {
     "completed_boxes_this_turn": false,
     "potential_boxes": {
-      "boxes_with_2_edges": 6,
       "boxes_with_3_edges": 0,
-      "total_potential_boxes": 6
+      "total_potential_boxes": 0
     },
     "game_phase": "early",
     "score_difference": 0,
