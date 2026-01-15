@@ -7,7 +7,7 @@ import random
 pygame.init()
 
 # AI player (loaded on demand)
-ai_player = None
+vlm = None
 
 # Constants
 WIDTH, HEIGHT = 600, 600
@@ -452,8 +452,8 @@ if not mode:
 
 # Load VLM if playing Bot vs VLM
 if mode == 'BotvVLM':
-    from ai_player import AIPlayer
-    ai_player = AIPlayer()
+    from vlm import VLM
+    vlm = VLM()
 
 # Main game loop
 running = True
@@ -489,7 +489,7 @@ while running:
         json_path = os.path.join(DATA_DIR, f"game_{game_id}", f"turn_{turn:03}.json")
         
         # Ask VLM for move
-        vlm_result = ai_player.get_move(last_screenshot, json_path)
+        vlm_result = vlm.get_move(last_screenshot, json_path)
         
         valid = False
         if vlm_result:

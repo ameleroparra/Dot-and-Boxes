@@ -3,7 +3,7 @@ import json
 import re
 import os
 
-class AIPlayer:
+class VLM:
     def __init__(self):
         print("Loading Qwen3-VL-4B...")
         self.model = AutoModelForImageTextToText.from_pretrained(
