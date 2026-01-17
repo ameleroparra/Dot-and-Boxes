@@ -1,0 +1,613 @@
+[
+    {
+        "image": "data/raw/game_15/turn_040.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 4, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 4, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_14/turn_022.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 2], ['h', 0, 3], ['h', 1, 0], ['h', 1, 1], ['h', 2, 0], ['h', 2, 1], ['h', 2, 2], ['h', 2, 3], ['h', 3, 0], ['h', 3, 3], ['h', 4, 0], ['h', 4, 1], ['h', 4, 2], ['v', 0, 2], ['v', 1, 3], ['v', 2, 2], ['v', 3, 1], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 0, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_7/turn_036.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['v', 0, 1], ['v', 1, 0], ['v', 1, 1], ['v', 1, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_2/turn_021.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 1], ['h', 0, 2], ['h', 0, 3], ['h', 2, 1], ['h', 3, 2], ['h', 4, 0], ['h', 4, 1], ['v', 0, 0], ['v', 0, 1], ['v', 0, 3], ['v', 1, 2], ['v', 1, 3], ['v', 1, 4], ['v', 2, 0], ['v', 2, 1], ['v', 2, 3], ['v', 2, 4], ['v', 3, 0], ['v', 3, 2], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 3, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_8/turn_040.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 3, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_3/turn_037.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 3], ['v', 0, 2], ['v', 0, 3], ['v', 1, 4]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 0, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_14/turn_026.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 2], ['h', 1, 0], ['h', 1, 1], ['h', 2, 0], ['h', 2, 1], ['h', 2, 2], ['h', 2, 3], ['h', 3, 3], ['h', 4, 1], ['h', 4, 2], ['v', 0, 2], ['v', 1, 3], ['v', 2, 2], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 2, 0]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_6/turn_029.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 1], ['h', 1, 0], ['h', 1, 3], ['h', 3, 1], ['v', 0, 2], ['v', 0, 3], ['v', 1, 1], ['v', 1, 2], ['v', 1, 3], ['v', 2, 0], ['v', 2, 1]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 1]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_4/turn_038.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 2, 3], ['h', 3, 3], ['v', 1, 4]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_1/turn_026.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 0], ['h', 1, 3], ['h', 2, 3], ['h', 3, 1], ['h', 3, 3], ['h', 4, 2], ['h', 4, 3], ['v', 0, 1], ['v', 0, 2], ['v', 0, 3], ['v', 1, 0], ['v', 1, 3], ['v', 2, 0], ['v', 2, 1], ['v', 3, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_6/turn_031.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 1], ['h', 1, 0], ['h', 1, 3], ['v', 0, 2], ['v', 0, 3], ['v', 1, 1], ['v', 1, 2], ['v', 1, 3], ['v', 2, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 2, 0]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_18/turn_022.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 3], ['h', 2, 1], ['h', 2, 2], ['h', 2, 3], ['h', 3, 0], ['h', 3, 1], ['h', 3, 2], ['h', 3, 3], ['h', 4, 1], ['h', 4, 2], ['v', 0, 1], ['v', 0, 2], ['v', 0, 3], ['v', 1, 0], ['v', 1, 1], ['v', 1, 3], ['v', 2, 0], ['v', 3, 4]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 0]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_27/turn_026.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3], ['h', 1, 2], ['h', 1, 3], ['h', 2, 0], ['h', 2, 1], ['h', 3, 1], ['h', 4, 1], ['h', 4, 2], ['v', 0, 0], ['v', 0, 1], ['v', 0, 2], ['v', 1, 1], ['v', 1, 4], ['v', 2, 0], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 3, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_22/turn_032.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 2, 0], ['h', 2, 1], ['h', 3, 0], ['h', 3, 1], ['h', 4, 1], ['h', 4, 2], ['h', 4, 3], ['v', 1, 1], ['v', 3, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 4, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_16/turn_024.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 3], ['h', 1, 0], ['h', 1, 1], ['h', 1, 3], ['h', 2, 1], ['h', 2, 3], ['h', 3, 0], ['h', 3, 1], ['h', 3, 2], ['h', 3, 3], ['h', 4, 2], ['h', 4, 3], ['v', 0, 2], ['v', 1, 0], ['v', 2, 1], ['v', 3, 1]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_21/turn_034.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 1], ['h', 2, 2], ['v', 0, 2], ['v', 0, 3], ['v', 0, 4], ['v', 1, 2], ['v', 2, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 2, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_9/turn_027.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 1], ['h', 2, 0], ['h', 2, 2], ['h', 3, 0], ['h', 3, 1], ['h', 3, 3], ['v', 0, 0], ['v', 0, 1], ['v', 1, 1], ['v', 2, 2], ['v', 2, 4], ['v', 3, 1], ['v', 3, 2], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 2, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_3/turn_039.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 3], ['v', 1, 4]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 1, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_29/turn_025.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 2], ['h', 1, 0], ['h', 1, 3], ['h', 2, 0], ['h', 2, 2], ['h', 2, 3], ['h', 3, 0], ['h', 3, 2], ['h', 3, 3], ['h', 4, 1], ['h', 4, 3], ['v', 0, 4], ['v', 1, 2], ['v', 3, 0], ['v', 3, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 0, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_30/turn_029.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 2], ['h', 1, 1], ['h', 1, 2], ['h', 3, 3], ['v', 0, 1], ['v', 1, 0], ['v', 1, 1], ['v', 1, 2], ['v', 2, 4], ['v', 3, 2], ['v', 3, 4]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 3, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_15/turn_030.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3], ['h', 1, 1], ['h', 1, 2], ['h', 1, 3], ['h', 2, 1], ['h', 3, 1], ['h', 4, 2], ['v', 0, 2], ['v', 1, 1], ['v', 1, 3], ['v', 3, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 1]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_26/turn_028.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 2], ['h', 1, 0], ['h', 1, 1], ['h', 2, 0], ['h', 2, 1], ['h', 4, 3], ['v', 0, 1], ['v', 0, 3], ['v', 2, 1], ['v', 3, 0], ['v', 3, 1], ['v', 3, 2], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 0, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_1/turn_038.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 0], ['v', 0, 1], ['v', 1, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 0, 1]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_27/turn_034.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3], ['h', 2, 0], ['h', 2, 1], ['h', 3, 1], ['h', 4, 1], ['v', 1, 1], ['v', 2, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 0, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_24/turn_031.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 2, 1], ['h', 3, 0], ['h', 3, 1], ['v', 0, 1], ['v', 0, 2], ['v', 0, 3], ['v', 0, 4], ['v', 1, 1], ['v', 3, 1]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 1]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_16/turn_033.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3], ['h', 1, 3], ['h', 2, 3], ['h', 3, 0], ['h', 3, 1], ['h', 3, 3], ['h', 4, 3], ['v', 2, 1]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 0]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_16/turn_023.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 3], ['h', 1, 0], ['h', 1, 1], ['h', 1, 3], ['h', 2, 1], ['h', 2, 2], ['h', 2, 3], ['h', 3, 0], ['h', 3, 1], ['h', 3, 2], ['h', 3, 3], ['h', 4, 2], ['h', 4, 3], ['v', 0, 2], ['v', 1, 0], ['v', 2, 1], ['v', 3, 1]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 2, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_11/turn_040.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 0, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_1/turn_040.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['v', 1, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 0]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_10/turn_022.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 1], ['h', 0, 2], ['h', 0, 3], ['h', 1, 1], ['h', 1, 2], ['h', 1, 3], ['h', 2, 0], ['h', 2, 2], ['h', 3, 0], ['h', 3, 1], ['h', 3, 3], ['h', 4, 0], ['v', 0, 0], ['v', 1, 1], ['v', 2, 2], ['v', 2, 4], ['v', 3, 2], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 1, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_21/turn_036.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 1], ['v', 0, 2], ['v', 0, 3], ['v', 0, 4], ['v', 1, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_27/turn_027.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3], ['h', 1, 2], ['h', 1, 3], ['h', 2, 0], ['h', 2, 1], ['h', 3, 1], ['h', 4, 1], ['h', 4, 2], ['v', 0, 0], ['v', 0, 1], ['v', 0, 2], ['v', 1, 1], ['v', 1, 4], ['v', 2, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 4, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_11/turn_037.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3], ['h', 1, 3], ['v', 1, 2], ['v', 1, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_25/turn_037.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 2], ['h', 2, 0], ['v', 1, 1], ['v', 2, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 0, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_9/turn_026.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 1], ['h', 2, 0], ['h', 2, 2], ['h', 3, 0], ['h', 3, 1], ['h', 3, 3], ['v', 0, 0], ['v', 0, 1], ['v', 1, 1], ['v', 1, 3], ['v', 2, 2], ['v', 2, 4], ['v', 3, 1], ['v', 3, 2], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_9/turn_037.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 3, 3], ['v', 2, 4], ['v', 3, 2], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 3, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_3/turn_023.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 0], ['h', 1, 3], ['h', 2, 2], ['h', 3, 0], ['h', 3, 2], ['h', 3, 3], ['h', 4, 0], ['h', 4, 1], ['h', 4, 2], ['h', 4, 3], ['v', 0, 1], ['v', 0, 2], ['v', 0, 3], ['v', 1, 1], ['v', 1, 2], ['v', 1, 4], ['v', 2, 1], ['v', 2, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 2, 1]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_12/turn_025.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 1], ['h', 0, 2], ['h', 0, 3], ['h', 1, 0], ['h', 1, 3], ['h', 2, 0], ['h', 3, 2], ['h', 3, 3], ['h', 4, 1], ['h', 4, 3], ['v', 0, 2], ['v', 1, 4], ['v', 2, 0], ['v', 2, 4], ['v', 3, 2]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_4/turn_026.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 1], ['h', 2, 2], ['h', 2, 3], ['h', 3, 1], ['h', 3, 2], ['h', 3, 3], ['v', 0, 2], ['v', 0, 3], ['v', 0, 4], ['v', 1, 2], ['v', 1, 4], ['v', 2, 1], ['v', 3, 0], ['v', 3, 1], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 2, 1]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_13/turn_029.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 3], ['h', 1, 0], ['h', 2, 0], ['h', 2, 3], ['h', 4, 0], ['h', 4, 3], ['v', 0, 4], ['v', 2, 0], ['v', 2, 4], ['v', 3, 0], ['v', 3, 4]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 2, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_16/turn_027.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3], ['h', 1, 0], ['h', 1, 1], ['h', 1, 3], ['h', 2, 1], ['h', 2, 3], ['h', 3, 0], ['h', 3, 1], ['h', 3, 3], ['h', 4, 3], ['v', 0, 2], ['v', 1, 0], ['v', 2, 1], ['v', 3, 1]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 1, 0]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_16/turn_040.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 0, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_17/turn_039.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 3, 3], ['h', 4, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_4/turn_028.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Blue. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 1], ['h', 2, 2], ['h', 2, 3], ['h', 3, 2], ['h', 3, 3], ['v', 0, 2], ['v', 0, 3], ['v', 0, 4], ['v', 1, 2], ['v', 1, 4], ['v', 3, 0], ['v', 3, 1], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 3, 1]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_1/turn_037.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 1, 0], ['v', 0, 1], ['v', 0, 2], ['v', 1, 0]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 0, 2]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_12/turn_032.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 0, 0], ['h', 0, 3], ['h', 1, 0], ['h', 1, 3], ['h', 2, 0], ['h', 3, 3], ['v', 1, 4], ['v', 2, 0], ['v', 2, 4]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['h', 3, 3]"
+            }
+        ]
+    },
+    {
+        "image": "data/raw/game_28/turn_038.png",
+        "conversation": [
+            {
+                "from": "human",
+                "value": "<image> You are playing Dots and Boxes, you are player Red. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: [['h', 4, 2], ['v', 1, 4], ['v', 3, 3]]. choose the move that will complete the box."
+            },
+            {
+                "from": "gpt",
+                "value": "['v', 1, 4]"
+            }
+        ]
+    }
+]

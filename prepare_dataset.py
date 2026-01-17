@@ -1,117 +1,80 @@
-import os
 import json
-from typing import List, Dict, Tuple
+import random
+from pathlib import Path
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(SCRIPT_DIR, "data", "raw")
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "data", "prepared")
+base_path = Path("data/raw")
+prepared_path = base_path.parent / "prepared"
+prepared_path.mkdir(parents=True, exist_ok=True)
 
-# Split ratios
-TRAIN_RATIO = 0.7
-VAL_RATIO = 0.15
-TEST_RATIO = 0.15
+dataset = []
 
-def collect_all_turns() -> List[Dict]:
-    """Collect training examples where boxes are completed (using previous turn's state as input)."""
-    all_turns = []
+# All the logic where we select only moves when a box was created
+for game_dir in sorted(base_path.glob("game_*")):
     
-    game_dirs = sorted([d for d in os.listdir(DATA_DIR) if d.startswith("game_") and os.path.isdir(os.path.join(DATA_DIR, d))])
-    
-    print(f"Found {len(game_dirs)} game directories")
-    
-    for game_dir in game_dirs:
-        game_path = os.path.join(DATA_DIR, game_dir)
-        turn_files = sorted([f for f in os.listdir(game_path) if f.startswith("turn_") and f.endswith(".json")])
-        
-        for i, turn_file in enumerate(turn_files):
-            turn_path = os.path.join(game_path, turn_file)
-            
-            try:
-                with open(turn_path, 'r') as f:
-                    turn_data = json.load(f)
+    turn_files = sorted(list(game_dir.glob("turn_*.json")))
+
+    for i in range(1, len(turn_files)):
+        current_file = turn_files[i]
+        previous_file = turn_files[i-1]
+
+        with open(current_file, 'r') as f_curr:
+
+            current_data = json.load(f_curr)
+
+            if current_data.get("strategy_info", {}).get("completed_boxes_this_turn") is True:
                 
-                # Check if this turn completed a box
-                completed_box = turn_data.get('strategy_info', {}).get('completed_boxes_this_turn', False)
+                with open(previous_file, 'r') as f_prev:
+                    previous_data = json.load(f_prev)
                 
-                if completed_box and i > 0:
-                    # Get the PREVIOUS turn (i-1)
-                    prev_turn_file = turn_files[i - 1]
-                    prev_turn_path = os.path.join(game_path, prev_turn_file)
-                    
-                    with open(prev_turn_path, 'r') as f:
-                        prev_turn_data = json.load(f)
-                    
-                    # Use previous turn's state as input, current turn's move as target
-                    screenshot_path = os.path.join(SCRIPT_DIR, prev_turn_data.get('screenshot', ''))
-                    
-                    all_turns.append({
-                        'json_path': prev_turn_path,
-                        'screenshot_path': screenshot_path,
-                        'game_id': prev_turn_data['game_id'],
-                        'turn': prev_turn_data['turn'],
-                        'current_player': prev_turn_data['current_player'],
-                        'move_taken': turn_data['move_taken'],  # Move from CURRENT turn (completes box)
-                        'available_moves': prev_turn_data['move_info']['available_moves'],
-                        'scores': prev_turn_data['scores']
-                    })
-                    
-            except Exception as e:
-                print(f"Error processing {turn_path}: {e}")
-    
-    print(f"Collected {len(all_turns)} box-completing turns")
-    return all_turns
+                img_path = previous_data.get("screenshot")
+                moves = previous_data.get("move_info", {}).get("available_moves")
+                answer = current_data.get("move_taken")
+                player = current_data.get("current_player")
 
-def split_dataset(turns: List[Dict]) -> Tuple[List[Dict], List[Dict], List[Dict]]:
-    total = len(turns)
-    train_size = int(total * TRAIN_RATIO)
-    val_size = int(total * VAL_RATIO)
-    
-    train_set = turns[:train_size]
-    val_set = turns[train_size:train_size + val_size]
-    test_set = turns[train_size + val_size:]
-    
-    # Save splits
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    
-    for split_data, split_name in [(train_set, "train"), (val_set, "val"), (test_set, "test")]:
-        output_path = os.path.join(OUTPUT_DIR, f"{split_name}.json")
-        with open(output_path, 'w') as f:
-            json.dump(split_data, f, indent=2)
-        print(f"Saved {len(split_data)} examples to {output_path}")
-    
-    return train_set, val_set, test_set
+                player = "Red" if player == 0 else "Blue"
 
-def print_statistics(train_set: List[Dict], val_set: List[Dict], test_set: List[Dict]):
-    """Print dataset statistics."""
-    print("\n" + "="*60)
-    print("DATASET STATISTICS")
-    print("="*60)
-    
-    total = len(train_set) + len(val_set) + len(test_set)
-    
-    print(f"Total samples: {total} (box-completing moves only)")
-    print(f"  Train:      {len(train_set)} ({len(train_set)/total*100:.1f}%)")
-    print(f"  Validation: {len(val_set)} ({len(val_set)/total*100:.1f}%)")
-    print(f"  Test:       {len(test_set)} ({len(test_set)/total*100:.1f}%)")
+                conversation_entry = {
+                    "image": img_path,
+                    "conversation": [
+                        {
+                            "from": "human",
+                            "value": f"<image> You are playing Dots and Boxes, you are player {player}. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: {moves}. choose the move that will complete the box."
+                        },
+                        {
+                            "from": "gpt",
+                            "value": f"{answer}"
+                        }
+                    ]
+                }
+                dataset.append(conversation_entry)
+
+# We shuffle with a defined seed
+random.seed(42)
+random.shuffle(dataset)
+
+# We split into train (80%), eval (10%), test (10%)
+total_len = len(dataset)
+train_end = int(total_len * 0.8)
+eval_end = int(total_len * 0.9)
+
+train_data = dataset[:train_end]
+eval_data = dataset[train_end:eval_end]
+test_data = dataset[eval_end:]
+
+splits = {
+    "dataset_train.json": train_data,
+    "dataset_eval.json": eval_data,
+    "dataset_test.json": test_data
+}
+
+# Here we save the splits
+for filename, data_split in splits.items():
+    save_path = prepared_path / filename
+    with open(save_path, "w", encoding="utf-8") as f:
+        json.dump(data_split, f, indent=4)
 
 
-def main():
-    print("Collecting all turns from games...")
-    all_turns = collect_all_turns()
-    
-    if len(all_turns) == 0:
-        print("No valid turns found. Exiting.")
-        return
-    
-    print("\nSplitting and saving dataset...")
-    train_set, val_set, test_set = split_dataset(all_turns)
-    
-    print_statistics(train_set, val_set, test_set)
-    
-    print("\n" + "="*60)
-    print("Dataset preparation complete!")
-    print(f"Output directory: {OUTPUT_DIR}")
-    print("="*60)
-
-if __name__ == "__main__":
-    main()
+# some info
+print(f"Dataset processing complete!")
+print(f"Total instances: {total_len}")
+print(f"Saved: {len(train_data)} to train, {len(eval_data)} to eval, {len(test_data)} to test.")
