@@ -1,16 +1,25 @@
-# Core dependencies
+# Game dependencies
 pygame-ce
 
-# Qwen3-VL dependencies
+# VLM and Core Training (Fixed versions for Unsloth 2026 compatibility)
+unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git
+unsloth_zoo
 transformers>=4.57.0
 torch
-accelerate>=0.20.0
+torchvision
+accelerate>=0.30.0
 pillow
+qwen-vl-utils
 
-# LoRA fine-tuning
-peft>=0.7.0
-bitsandbytes>=0.41.0
+# LoRA and Quantization
+peft>=0.10.0
+bitsandbytes>=0.43.0
+triton
+cut_cross_entropy
 
-# Training utilities
-tensorboard
+# Training Utilities
 datasets
+trl<0.13.0
+tensorboard
+tqdm
+matplotlib
