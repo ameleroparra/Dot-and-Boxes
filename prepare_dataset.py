@@ -34,15 +34,20 @@ for game_dir in sorted(base_path.glob("game_*")):
                 player = "Red" if player == 0 else "Blue"
 
                 conversation_entry = {
-                    "image": img_path,
-                    "conversation": [
+                    "messages": [
                         {
-                            "from": "human",
-                            "value": f"<image> You are playing Dots and Boxes, you are player {player}. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: {moves}. choose the move that will complete the box."
+                            "role": "user",
+                            "content": [
+                                {"type": "image", "image": img_path},
+                                {"type": "text", "text": f"You are playing Dots and Boxes, you are player {player}. The image you are seing is what the previous player did. The other player placed a third edge and now there is an option for you to complete a box and win a point. To select a move you will have first to decide if you want to place an horizontal (h) or a vertical (v) line between the grey points. Then you will have to specify in which position you want to place that line with the next format: ['h', x, y] or ['v', x, y] where x is the row and y is the column. For horizontal lines, rows go from top(0) to bottom(4) and columns from left(0) to right(3). For vertical lines, rows go from top(0) to bottom(3) and columns from left(0) to right(4). Your available moves are: {moves}. choose the move that will complete the box."}
+                            ]
+                    
                         },
                         {
-                            "from": "gpt",
-                            "value": f"{answer}"
+                            "role": "assistant",
+                            "content":[
+                                {"type": "text", "text": f"{answer}"}
+                            ]
                         }
                     ]
                 }
