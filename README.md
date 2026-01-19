@@ -22,6 +22,12 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
+```bash
+pip install ipykernel
+
+python -m ipykernel install --user --name=my-new-env --display-name "My Project (Python 3.12)"
+```
+
 ## Usage
 
 Run the game:
